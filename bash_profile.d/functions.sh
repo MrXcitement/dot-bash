@@ -1,4 +1,4 @@
-# bash_functions -- Library of helper functions for bash
+# functions -- Library of helper functions for bash
 
 # Mike Barker <mike@thebarkers.com>
 # April 13th 2013
