@@ -13,5 +13,8 @@ alias en='emacs -nw'
 alias ec='emacsclient'
 alias ecn='emacsclient -nw'
 
+##
+# hunspell setup -- use brew install hunspell
+export DICTIONARY=en_US
 
 
