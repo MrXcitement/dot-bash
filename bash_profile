@@ -23,3 +23,16 @@ fi
 export HISTSIZE=1000
 export HISTIGNORE="&b:[bf]g:exit"
 
+# Get the system name
+System=$(uname -s)
+Bash_completion_file=""
+
+# Set the sytem specific bash completion file
+if [[ "$System" == "Darwin" ]]; then
+    Bash_completion_file=$(brew --prefix)/etc/bash_completion
+fi
+
+# If the bash completion file is available, initialize it.
+if [[ -f $Bash_completion_file ]]; then
+    . $Bash_completion_file
+fi
