@@ -134,9 +134,9 @@ fi
 # Get number of CPUs on system
 if [[ ${System} == "Linux" ]]; then
     NCPU=$(grep -c 'processor' /proc/cpuinfo)    # Number of CPUs
-    SLOAD=$(( 100*${NCPU} ))        # Small load
-    MLOAD=$(( 200*${NCPU} ))        # Medium load
-    XLOAD=$(( 400*${NCPU} ))        # Xlarge load
+    SLOAD=$(( 200*${NCPU} ))        # Small load
+    MLOAD=$(( 400*${NCPU} ))        # Medium load
+    XLOAD=$(( 600*${NCPU} ))        # Xlarge load
 elif [[ ${System} == "Darwin" ]]; then
     NCPU=$(sysctl -n machdep.cpu.core_count)
     SLOAD=$(( 25 ))        # Small load
