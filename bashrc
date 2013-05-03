@@ -114,6 +114,8 @@ fi
 # Test connection type:
 if [ -n "${SSH_CONNECTION}" ]; then
     CNX=${Green}        # Connected on remote machine, via ssh (good).
+elif [[ "${DISPLAY%%org.macosforge.xquartz:0*}" != "" ]]; then
+    CNX=${BCyan}	# Connected on local machine w/XQuartz installed (ok).
 elif [[ "${DISPLAY%%:0*}" != "" ]]; then
     CNX=${ALERT}        # Connected on remote machine, not via ssh (bad).
 else
@@ -206,6 +208,12 @@ function job_color()
     fi
 }
 
+# Add git branch if available
+function git_branch()
+{
+	declare -F __git_ps1 &>/dev/null && __git_ps1 || echo ""
+}
+
 # Adds some text in the terminal frame (if applicable).
 
 # Now we construct the prompt.
@@ -218,14 +226,14 @@ case ${TERM} in
         # User@Host (with connection type info):
         PS1=${PS1}"\[${SU}\]\u\[${NC}\]@\[${CNX}\]\h\[${NC}\] "
         # PWD (with 'disk space' info):
-        PS1=${PS1}"\[\$(disk_color)\]\W]\[${NC}\] "
+		PS1=${PS1}"\[\$(disk_color)\]\W]\$(git_branch)\[${NC}\] "
         # Prompt (with 'job' info):
         PS1=${PS1}"\[\$(job_color)\]>\[${NC}\] "
         # Set title of current xterm:
         PS1=${PS1}"\[\e]0;[\u@\h] \w\a\]"
         ;;
     *)
-        PS1="(\A \u@\h \W) > " # --> PS1="(\A \u@\h \w) > "
+		PS1="(\A \u@\h \W)\$(git_branch)> " # --> PS1="(\A \u@\h \w) > "
                                # --> Shows full pathname of current dir.
         ;;
 esac
