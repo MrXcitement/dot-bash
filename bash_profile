@@ -36,3 +36,5 @@ fi
 if [[ -f $Bash_completion_file ]]; then
     . $Bash_completion_file
 fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
