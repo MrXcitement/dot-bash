@@ -16,7 +16,6 @@ fi
 
 # limit system-wide resourse usage
 ulimit -S -c 0	    # no coredumps
-ulimit -S -u 200    # max user processes
 
 # Manipulate shell variables
 set -o notify	   # report status of terminated background jobs immediately
@@ -24,14 +23,15 @@ set -o noclobber   # prevent redirection from overwriting files
 set -o ignoreeof   # do not exit on eof
 
 # Load the bash prompt
-if [ -f ~/.bash_prompt ]; then
-    source ~/.bash_prompt
+if [ -f "$HOME/.bash_prompt" ]; then
+    source "$HOME/.bash_prompt"
 fi
 
 # Display bash version and date
 printf "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan}\
  - DISPLAY on ${BRed}$DISPLAY${NC}\n"
-date
+
+echo $(date)
 
 # Makes our day a bit more fun....
 if [ -x /usr/games/fortune ]; then
