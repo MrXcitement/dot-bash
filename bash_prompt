@@ -81,7 +81,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 # Test connection type:
 if [ -n "${SSH_CONNECTION}" ]; then
     CNX=${Green}        # Connected on remote machine, via ssh (good).
-elif [[ (${DISPLAY} == *:0) && (${DISPLAY} != *xquartz:0) ]]; then
+elif [[ (${DISPLAY} == *:0) && (${DISPLAY} != *xquartz:0) && (${DISPLAY} != :0) ]]; then
     CNX=${ALERT}        # Connected on remote machine, not via ssh (bad).
 else
     CNX=${BCyan}        # Connected on local machine.
@@ -99,9 +99,9 @@ fi
 # Get number of CPUs on system
 if [[ ${System} == "Linux" ]]; then
     NCPU=$(grep -c 'processor' /proc/cpuinfo)    # Number of CPUs
-    SLOAD=$(( 100*${NCPU} ))    # Small load
-    MLOAD=$(( 200*${NCPU} ))    # Medium load
-    XLOAD=$(( 400*${NCPU} ))    # Xlarge load
+    SLOAD=$(( 200*${NCPU} ))    # Small load
+    MLOAD=$(( 400*${NCPU} ))    # Medium load
+    XLOAD=$(( 600*${NCPU} ))    # Xlarge load
 
 elif [[ ${System} == "Darwin" ]]; then
     NCPU=$(sysctl -n machdep.cpu.core_count)
@@ -111,9 +111,9 @@ elif [[ ${System} == "Darwin" ]]; then
 
 else
     NCPU=1
-    SLOAD=$(( 100*${NCPU} ))    # Small load
-    MLOAD=$(( 200*${NCPU} ))    # Medium load
-    XLOAD=$(( 400*${NCPU} ))    # Xlarge load
+    SLOAD=$(( 200*${NCPU} ))    # Small load
+    MLOAD=$(( 400*${NCPU} ))    # Medium load
+    XLOAD=$(( 600*${NCPU} ))    # Xlarge load
 fi
 
 # Returns system load as percentage, i.e., '40' rather than '0.40)'.
