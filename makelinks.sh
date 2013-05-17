@@ -9,6 +9,7 @@ echo "Make sympolic links in the users home directory to the bash config files a
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 for FILE in bash* inputrc; do 
+    echo "Processing file ${FILE}"
     if [ -a ~/.${FILE} ]; then
 	if ! [ -h ~/.${FILE} ]; then
 	    mv ~/.${FILE} ~/.${FILE}.backup
