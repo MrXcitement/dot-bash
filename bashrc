@@ -60,5 +60,22 @@ alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 
+# Get the system name
+System=$(uname -s)
+Bash_completion_file=""
+
+# Set the sytem specific bash completion file
+if [[ "${System}" == "Darwin" ]]; then
+    Bash_completion_file=$(brew --prefix)/etc/bash_completion
+elif [[ "${System}" == "Linux" ]]; then
+    Bash_completion_file=/etc/bash_completion
+fi
+
+# If the bash completion file is available, initialize it.
+if [[ -f ${Bash_completion_file} ]]; then
+    . ${Bash_completion_file}
+fi
+
 # rvm setup
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
