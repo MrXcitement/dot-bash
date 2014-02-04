@@ -212,7 +212,7 @@ PROMPT_COMMAND="history -a"
 # Now we construct the prompt.
 case ${TERM} in
   *term* | rxvt | linux)
-        #PS1="\[\$(load_color)\][\A\[${NC}\] "
+        PS1="\[\$(load_color)\][\A\[${NC}\] "
 
         # Time of day (with load info):
         PS1="[\[\$(load_color)\]\A\[${NC}\] "
@@ -221,19 +221,23 @@ case ${TERM} in
         PS1=${PS1}"\[${SU}\]\u\[${NC}\]@\[${CNX}\]\h\[${NC}\] "
 
         # PWD (with 'disk space' info):
-	PS1=${PS1}"\[\$(disk_color)\]\W\[${NC}\]"
+	    PS1=${PS1}"\[\$(disk_color)\]\W\[${NC}\]"
         
-	# Github branch:
-	PS1=${PS1}"\$(git_branch)]"
+	    # Github branch:
+	    PS1=${PS1}"\$(git_branch)]"
         
-	# Prompt (with 'job' info):
+	    # Prompt (with 'job' info):
         PS1=${PS1}"\n\[\$(job_color)\]\$\[${NC}\] "
 
-	# Set title of current xterm:
-        PS1=${PS1}"\[\e]0;[\u@\h] \w\$(git_branch)\a\]"
-        ;;
+	    # Set title of current xterm:
+        case $TERM in
+			xterm*)
+				PS1=${PS1}"\[\e]0;[\u@\h] \w\$(git_branch)\a\]"
+			;;
+		esac
+		;;
     *)
 	# --> Shows full pathname of current dir.
 	PS1="[\A \u@\h \w \$(git_branch)]\n\$ "
-        ;;
+    ;;
 esac
