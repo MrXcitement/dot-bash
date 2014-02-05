@@ -8,7 +8,7 @@
 if [ -z "$PS1" ]; then
     return
 fi
- 
+
 # If the system bashrc file exist, load it.
 if [ -f "/etc/bashrc" ]; then
     source /etc/bashrc
@@ -54,6 +54,7 @@ alias e='emacs'
 alias en='emacs -nw'
 alias ec='emacsclient'
 alias ecn='emacsclient -nw'
+alias ee='open -a ~/Applications/Emacs.app'
 
 # ls aliases
 alias ll='ls -l'
@@ -78,4 +79,11 @@ fi
 
 # rvm setup
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# python and virtualenv setup
+if [[ -x /usr/local/bin/virtualenv ]]; then
+    if [[ -x /usr/local/bin/virtualenvwrapper.sh ]]; then
+	. /usr/local/bin/virtualenvwrapper.sh
+    fi
+fi
