@@ -23,4 +23,5 @@ fi
 export HISTSIZE=1000
 export HISTIGNORE="&b:[bf]g:exit"
 
+# initialize the ssh-agent script so that we can auto-login to ssh servers
 eval `ssh-agent`
