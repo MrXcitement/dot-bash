@@ -51,10 +51,9 @@ export DICTIONARY=en_US
 
 # Command aliases for emacs
 alias e='emacs'
-alias en='emacs -nw'
 alias ec='emacsclient'
-alias ecn='emacsclient -nw'
-alias ee='open -a ~/Applications/Emacs.app'
+alias en='emacs -nw'
+alias enc='emacsclient -nw'
 
 # ls aliases
 alias ll='ls -l'
