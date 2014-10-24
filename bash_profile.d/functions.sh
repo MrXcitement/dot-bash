@@ -1,7 +1,9 @@
 # functions -- Library of helper functions for bash
 
-# Mike Barker <mike@thebarkers.com>
-# April 13th 2013
+# Copyright (C) 2013-2014 Mike Barker
+
+# Author: Mike Barker <mike@thebarkers.com>
+# Created: April 13th 2013
 
 # Functions to help us manage paths.  Second argument is the name of the
 # path variable to be modified (default: PATH)

@@ -1,9 +1,11 @@
 # dircolors.sh -- colorize the directory listing ls command.
+
+# Copyright (C) 2013-2014 Mike Barker
+
+# Author: Mike Barker <mike@thebarkers.com>
+# Created: April 13th, 2013
+
 # This script handles both BSD (Mac OS) and GNU/Linux ls commands.
-
-# Mike Barker <mike@thebarkers.com>
-# April 13th, 2013
-
 if ls --color -d . >/dev/null 2>&1; then
     if [ -f "$HOME/.dircolors" ] ; then
 	eval $(dircolors -b $HOME/.dircolors)
