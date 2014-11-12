@@ -10,7 +10,7 @@
 # * First release.
 
 # The next line updates PATH for the Google Cloud SDK.
-source '${home}/bin/google-cloud-sdk/path.bash.inc'
+source "${HOME}"/bin/google-cloud-sdk/path.bash.inc
 
 # The next line enables bash completion for gcloud.
-source '${home}/bin/google-cloud-sdk/completion.bash.inc'
+source "${HOME}"/bin/google-cloud-sdk/completion.bash.inc
