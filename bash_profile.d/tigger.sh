@@ -11,5 +11,5 @@
 # * First release.
 
 if [[ `hostname -s` = tigger ]]; then
-    export VAGRANT_HOME=/Volumes/MyPassport01/vagrant
+    export VAGRANT_HOME=/Volumes/MyPassport01/vagrant/vagrant.d
 fi
