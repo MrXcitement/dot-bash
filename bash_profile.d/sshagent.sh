@@ -21,7 +21,7 @@ function agent_has_keys() {
 
 function agent_is_running() {
     if [ "$SSH_AUTH_SOCK" ]; then
-	agent_has_keys || [ $? -eq 1]
+	agent_has_keys || [ $? -eq 1 ]
     else
 	false
     fi
