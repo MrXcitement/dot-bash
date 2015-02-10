@@ -6,14 +6,29 @@
 # Created: October 24, 2014
 
 # Initialize the ssh-agent script so that we can auto-login to ssh servers.
-# On gnome systems that have the gnome-keyring-daemon installed and are 
-# running X, setup the gnome-keyring-daemon to provide keymanagement.
-# To keep the shell from hanging when exiting, I export the GNOME_KEYRING_PID
-# and then in .bash_logout, I check for this environment variable and kill the
-# gnome-keyring-daemon and dbus-launch processes that have been spawned.
 
-eval `ssh-agent -s`
-if type gnome-keyring-daemon >/dev/null 2>&1 && [ -n "$DISPLAY" ]; then
-	eval `gnome-keyring-daemon -s`
-	export GNOME_KEYRING_PID
+# 2015.02.10 MRB
+# * Bug: the ssh-agent was loaded at every login, this caused it to be left in mem.
+# * Gnome keyring setup moved to it's own file gnome-keyring-daemon.sh
+
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    #ps ${SSH_AGENT_PID} doesn't work under cywgin
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
 fi

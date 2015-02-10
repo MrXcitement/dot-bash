@@ -9,8 +9,19 @@
 # 2014.10.24
 # * First release.
 
+# 2015.02.10
+# * Only source files when they exist.
+
 # The next line updates PATH for the Google Cloud SDK.
-source "${HOME}"/bin/google-cloud-sdk/path.bash.inc
+GCLOUD_PATH="${HOME}/bin/google-cloud-sdk/path.bash.inc"
+if [ -f $GCLOUD_PATH ]
+then
+     source $GCLOUD_PATH
+fi
 
 # The next line enables bash completion for gcloud.
-source "${HOME}"/bin/google-cloud-sdk/completion.bash.inc
+GCLOUD_COMPLETE="${HOME}/bin/google-cloud-sdk/completion.bash.inc"
+if [ -f $GCLOUD_COMPLETE ]
+then
+   source $GCLOUD_COMPLETE
+fi
