@@ -1,6 +1,5 @@
-# dircolors.sh -- colorize the directory listing ls command.
-
-# Copyright (C) 2013-2014 Mike Barker
+# ls.sh -- ls customization
+# colorize the ls command and assign some aliases
 
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: April 13th, 2013
@@ -18,3 +17,8 @@ elif ls -G -d . >/dev/null 2>&1; then
     export LSCOLORS=ExFxCxDxBxegedabagacad
     alias ls='ls -G'
 fi
+
+# ls aliases
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'

@@ -26,5 +26,3 @@ done
 if [ "$BASH" ] && [ -r $HOME/.bashrc ]; then
     . $HOME/.bashrc
 fi
-
-

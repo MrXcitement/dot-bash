@@ -1,6 +1,4 @@
-# gcloud.sh --- Setup command line access to Google Cloud SDK
-
-# Copyright (C) 2014 by Mike Barker
+# gcloud.bash --- Setup command line access to Google Cloud SDK
 
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: October 24, 2014

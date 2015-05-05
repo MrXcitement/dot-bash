@@ -1,4 +1,4 @@
-# functions -- Library of helper functions for bash
+# path.bash -- Library of path helper functions for bash
 
 # Copyright (C) 2013-2014 Mike Barker
 

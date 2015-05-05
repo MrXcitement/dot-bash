@@ -1,12 +1,10 @@
-# gnome-keyring-daemon.sh --- Load the gnome-keyring-daemon
+# gnome-keyring-daemon.bash --- Load the gnome-keyring-daemon
 
 # On gnome systems that have the gnome-keyring-daemon installed and are
 # running X, setup the gnome-keyring-daemon to provide keymanagement.
 # To keep the shell from hanging when exiting, I export the GNOME_KEYRING_PID
 # and then in .bash_logout, I check for this environment variable and kill the
 # gnome-keyring-daemon and dbus-launch processes that have been spawned.
-
-# Copyright (C) 2015 by Mike Barker
 
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: February 10, 2015
