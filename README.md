@@ -10,7 +10,7 @@ Configured to work on the following systems:
 
 ##Startup file sourcing order
 |No. | File                     | Sourced by                    |
-|----|--------------------------|-------------------------------|
+|---:|--------------------------|-------------------------------|
 |   1|/etc/profile              |'bash' or 'sh' shells          |
 |   2|~/.bash_profile           |'bash' shell                   |
 |   3|~/.profile.d/*.bash files |~/.bash_profile                |
