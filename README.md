@@ -3,19 +3,19 @@
 My personal 'sh' and 'bash' shell configuration files.
 ##System
 Configured to work on the following systems:
--OS X 10.9+
--Linux (Raspian, Ubuntu)
+* OS X 10.9+
+* Linux (Raspian, Ubuntu)
 ##Startup file sourcing order
-/etc/profile
-~/.bash_profile					sourced by 'bash'
-~/.profile.d/*.bash files		sourced by ~/.bash_profile
-~/.profile						sourced by ~/.bash_profile or 'sh' shell
-~/.profile.d/*.sh files 		sourced by ~/.profile
-~/.shrc							sourced by ~/.profile
-~/.bashrc.d/*.sh files			sourced by ~/.shrc
-~/.bashrc						sourced by ~/.shrc, only if 'bash' shell
-~/.bashrc.d/*.bash files		sourced by ~/.bashrc
-/etc/bashrc						sourced by ~/.bashrc
+1. /etc/profile               sourced by 'bash' or 'sh' shells
+2. ~/.bash_profile					  sourced by 'bash'
+3. ~/.profile.d/*.bash files	sourced by ~/.bash_profile
+4. ~/.profile						      sourced by ~/.bash_profile or 'sh' shell
+5. ~/.profile.d/*.sh files 		sourced by ~/.profile
+6. ~/.shrc							      sourced by ~/.profile
+7. ~/.bashrc.d/*.sh files			sourced by ~/.shrc
+8. ~/.bashrc						      sourced by ~/.shrc, only if 'bash' shell
+9. ~/.bashrc.d/*.bash files		sourced by ~/.bashrc
+10. /etc/bashrc						    sourced by ~/.bashrc
 ##Usage
 When you want to add some configuration information
 
