@@ -1,10 +1,13 @@
 #bashrc
+
 ##Description
 My personal 'sh' and 'bash' shell configuration files.
+
 ##System
 Configured to work on the following systems:
 * OS X 10.9+
 * Linux (Raspian, Ubuntu)
+
 ##Startup file sourcing order
 1. /etc/profile               sourced by 'bash' or 'sh' shells
 2. ~/.bash_profile					  sourced by 'bash'
@@ -16,6 +19,7 @@ Configured to work on the following systems:
 8. ~/.bashrc						      sourced by ~/.shrc, only if 'bash' shell
 9. ~/.bashrc.d/*.bash files		sourced by ~/.bashrc
 10. /etc/bashrc						    sourced by ~/.bashrc
+
 ##Usage
 When you want to add some configuration information
 
