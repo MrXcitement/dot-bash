@@ -1,11 +1,13 @@
-# bashrc -- Personal aliases and functions
-# Loaded by shrc if current shell is bash
-# To install symlink to ~/.bashrc
+# bashrc -- Personal aliases and functions used by bash
 
 # Mike Mike <mike@thebarkers.com>
 # April 13th, 2013
 
-echo "Loading .bashrc"
+# Sourced by ~/.shrc if current shell is bash
+# Source /etc/bashrc
+# Source ~/.bashrc.d/*.bash files
+
+[ $DEBUG ] && echo "Loading .bashrc"
 
 # If not running interactively, just exit
 if [ -z "$PS1" ]; then
@@ -14,13 +16,15 @@ fi
 
 # If the system bashrc file exist, load it.
 if [ -f "/etc/bashrc" ]; then
-    source /etc/bashrc
+    [ $DEBUG ] && echo "Loading /etc/bashrc"
+    . /etc/bashrc
 fi
 
-# Load the bash scripts in personal profile directory
+# Load the bash scripts in personal bashrc.d directory
 for script in $HOME/.bashrc.d/*.bash; do
     if [ -r $script ]; then
-	source $script
+	[ $DEBUG ] && echo "Loading $script"
+	. $script
     fi
 done
 
@@ -83,7 +87,9 @@ fi
 
 # rvm setup
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then
+    . "$HOME/.rvm/scripts/rvm"
+fi
 
 # python and virtualenv setup
 if [[ -x /usr/local/bin/virtualenv ]]; then

@@ -16,12 +16,12 @@
 GCLOUD_PATH="${HOME}/bin/google-cloud-sdk/path.bash.inc"
 if [ -f $GCLOUD_PATH ]
 then
-     source $GCLOUD_PATH
+    . $GCLOUD_PATH
 fi
 
 # The next line enables bash completion for gcloud.
 GCLOUD_COMPLETE="${HOME}/bin/google-cloud-sdk/completion.bash.inc"
 if [ -f $GCLOUD_COMPLETE ]
 then
-   source $GCLOUD_COMPLETE
+    . $GCLOUD_COMPLETE
 fi

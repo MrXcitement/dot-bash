@@ -1,21 +1,30 @@
-# shrc -- Personal environment variables and startup programs.
-# This file is loaded by .profile
-# Symlink this file to ~/.shrc
+# shrc -- Personal aliases and functions used by sh and bash.
 
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: May 4th, 2015
-# Copyright (C) 2015 Mike Barker
 
-echo "Loading .shrc"
+# Sourced by ~/.profile
+# Source ~/.bashrc.d/*.sh files
+# Source ~/.bashrc file, only if the current shell is bash.
 
-# Load the sh scripts in personal profile directory
+[ $DEBUG ] && echo "Loading .shrc"
+
+# If not running interactively, just exit
+if [ -z "$PS1" ]; then
+    return
+fi
+
+# Load the sh scripts in personal bashrc.d directory
 for script in $HOME/.bashrc.d/*.sh; do
     if [ -r $script ]; then
-		source $script
+	[ $DEBUG ] && echo "Loading $script"
+	. $script
     fi
 done
 
 # load the personal bashrc file if running bash and it exisits
-if [ "$PS1" ] && [ -r $HOME/.bashrc ]; then
-    source $HOME/.bashrc
+if [ "$BASH" ] && [ -r $HOME/.bashrc ]; then
+    . $HOME/.bashrc
 fi
+
+

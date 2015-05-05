@@ -1,7 +1,5 @@
 # prompt.bash -- Configure the bash prompt
 
-echo "Loading prompt.bash"
-
 # Get the system name
 System=`uname -s`
 

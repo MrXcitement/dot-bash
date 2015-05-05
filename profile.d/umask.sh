@@ -6,7 +6,7 @@
 # Created: October 24, 2014
 
 # By default we want the umask to get set.
-if [ "$(id -gn)" = "$(id -un)" -a $EUID -gt 99 ] ; then
+if [ "$(id -gn)" = "$(id -un)" -a $(id -u) -gt 99 ] ; then
   umask 002
 else
   umask 022
