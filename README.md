@@ -9,25 +9,25 @@ Configured to work on the following systems:
 * Linux (Raspian, Ubuntu)
 
 ##Startup file sourcing order
-1.  /etc/profile 
+1.  /etc/profile  
     sourced by 'bash' or 'sh' shells
-2.  ~/.bash_profile
+2.  ~/.bash_profile  
     sourced by 'bash'
-3.  ~/.profile.d/*.bash files
+3.  ~/.profile.d/*.bash files  
     sourced by ~/.bash_profile
-4.  ~/.profile
+4.  ~/.profile  
     sourced by ~/.bash_profile or 'sh' shell
-5.  ~/.profile.d/*.sh files
+5.  ~/.profile.d/*.sh files  
     sourced by ~/.profile
-6.  ~/.shrc
+6.  ~/.shrc  
     sourced by ~/.profile
-7.  ~/.bashrc.d/*.sh files
+7.  ~/.bashrc.d/*.sh files  
     sourced by ~/.shrc
-8.  ~/.bashrc
+8.  ~/.bashrc  
     sourced by ~/.shrc, only if 'bash' shell
-9.  ~/.bashrc.d/*.bash files
+9.  ~/.bashrc.d/*.bash files  
     sourced by ~/.bashrc
-10. /etc/bashrc
+10. /etc/bashrc  
     sourced by ~/.bashrc
 
 ##Usage
