@@ -6,7 +6,7 @@
 # Created: May 4th, 2015
 # Copyright (C) 2015 Mike Barker
 
-echo $HOME/.profile
+echo "Loading .profile"
 
 # If the personal bashrc file exist, source it
 if [ -f $HOME/.bashrc ]; then
@@ -16,6 +16,6 @@ fi
 # Load the bash scripts in personal profile directory
 for script in $HOME/.profile.d/*.sh; do
     if [ -r $script ]; then
-		source $script
+	source $script
     fi
 done

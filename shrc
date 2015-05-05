@@ -6,7 +6,7 @@
 # Created: May 4th, 2015
 # Copyright (C) 2015 Mike Barker
 
-echo $HOME/.shrc
+echo "Loading .shrc"
 
 # Load the sh scripts in personal profile directory
 for script in $HOME/.bashrc.d/*.sh; do

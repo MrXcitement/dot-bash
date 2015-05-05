@@ -1,4 +1,6 @@
-# bash_prompt -- Configure the bash prompt
+# prompt.bash -- Configure the bash prompt
+
+echo "Loading prompt.bash"
 
 # Get the system name
 System=`uname -s`
@@ -156,7 +158,7 @@ function disk_color()
         # No 'write' privilege in the current directory.
     elif [ -s "${PWD}" ] ; then
         local used=$(command df -P "$PWD" |
-                   awk 'END {print $5}' | 
+                   awk 'END {print $5}' |
 		   awk '{sub(/%/,""); print}')
         if [ ${used} -gt 95 ]; then
             printf ${ALERT}           # Disk almost full (>95%).
@@ -225,10 +227,10 @@ case ${TERM} in
 
         # PWD (with 'disk space' info):
 	    PS1=${PS1}"\[\$(disk_color)\]\W\[${NC}\]"
-        
+
 	    # Github branch:
 	    PS1=${PS1}"\$(git_branch)]"
-        
+
 	    # Prompt (with 'job' info):
         PS1=${PS1}"\n\[\$(job_color)\]\$\[${NC}\] "
 

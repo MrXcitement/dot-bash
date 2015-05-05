@@ -6,12 +6,12 @@
 # Created: April 13th, 2013
 # Copyright (C) 2013-2015 Mike Barker
 
-echo $HOME/.bash_profile
+echo "Loading .bash_profile"
 
 # Load the bash scripts in the personal profile directory
 for script in $HOME/.profile.d/*.bash; do
     if [ -r $script ]; then
-		source $script
+	source $script
     fi
 done
 

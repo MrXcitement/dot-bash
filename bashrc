@@ -5,7 +5,7 @@
 # Mike Mike <mike@thebarkers.com>
 # April 13th, 2013
 
-echo $HOME/.bashrc
+echo "Loading .bashrc"
 
 # If not running interactively, just exit
 if [ -z "$PS1" ]; then
@@ -20,7 +20,7 @@ fi
 # Load the bash scripts in personal profile directory
 for script in $HOME/.bashrc.d/*.bash; do
     if [ -r $script ]; then
-		source $script
+	source $script
     fi
 done
 
@@ -31,11 +31,6 @@ ulimit -S -c 0	    # no coredumps
 set -o notify	   # report status of terminated background jobs immediately
 set -o noclobber   # prevent redirection from overwriting files
 set -o ignoreeof   # do not exit on eof
-
-# Load the bash prompt
-if [ -f "$HOME/.bash_prompt" ]; then
-    source "$HOME/.bash_prompt"
-fi
 
 # Display bash version and date
 printf "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan}\
