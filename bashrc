@@ -1,8 +1,11 @@
 # bashrc -- Personal aliases and functions
+# Loaded by shrc if current shell is bash
 # To install symlink to ~/.bashrc
 
 # Mike Mike <mike@thebarkers.com>
 # April 13th, 2013
+
+echo $HOME/.bashrc
 
 # If not running interactively, just exit
 if [ -z "$PS1" ]; then
@@ -13,6 +16,13 @@ fi
 if [ -f "/etc/bashrc" ]; then
     source /etc/bashrc
 fi
+
+# Load the bash scripts in personal profile directory
+for script in $HOME/.bashrc.d/*.bash; do
+    if [ -r $script ]; then
+		source $script
+    fi
+done
 
 # limit system-wide resourse usage
 ulimit -S -c 0	    # no coredumps

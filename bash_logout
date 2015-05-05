@@ -5,6 +5,8 @@
 # Mike Mike <mike@thebarkers.com>
 # April 13th, 2013
 
+echo $0
+
 # Cleanup when logging out
 if [ -n "$GNOME_KEYRING_PID" ]; then
 	killall gnome-keyring-daemon

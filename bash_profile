@@ -1,30 +1,21 @@
 # bash_profile -- Personal environment variables and startup programs.
-
-# Copyright (C) 2013-2014 Mike Barker
+# This file is loaded by bash at startup, interactive or not.
+# Symlink this file to ~/.bash_profile.
 
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: April 13th, 2013
+# Copyright (C) 2013-2015 Mike Barker
 
-# This file is loaded at bash startup by all shells, interactive or not.
-# Symlink this file to ~/.bash_profile.
+echo $HOME/.bash_profile
 
-# Load the scripts in personal bash_profile directory
-for script in $HOME/.bash_profile.d/*.sh; do
+# Load the bash scripts in the personal profile directory
+for script in $HOME/.profile.d/*.bash; do
     if [ -r $script ]; then
-	source $script
+		source $script
     fi
 done
 
-# Load personal bashrc file
-if [ -f "$HOME/.bashrc" ]; then
-    source $HOME/.bashrc
+# Source the personal .profile file
+if [ -f "$HOME/.profile" ]; then
+    source $HOME/.profile
 fi
-
-# Add peronal bin dir to path
-if [ -d "$HOME/bin" ]; then
-    export PATH=$HOME/bin:$PATH
-fi
-
-# History configuration
-export HISTSIZE=1000
-export HISTIGNORE="&b:[bf]g:exit"
