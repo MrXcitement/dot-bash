@@ -9,25 +9,18 @@ Configured to work on the following systems:
 * Linux (Raspian, Ubuntu)
 
 ##Startup file sourcing order
-| File                      | Sourced by                    |
-|---------------------------|-------------------------------|
-|/etc/profile               |'bash' or 'sh' shells          |
-|~/.bash_profile            |'bash' shell                   |
-|~/.profile.d/*.bash files  |~/.bash_profile                |
-|~/.profile                 |~/.bash_profile or 'sh' shell  |
-
-5.  ~/.profile.d/*.sh files  
-    sourced by ~/.profile
-6.  ~/.shrc  
-    sourced by ~/.profile
-7.  ~/.bashrc.d/*.sh files  
-    sourced by ~/.shrc
-8.  ~/.bashrc  
-    sourced by ~/.shrc, only if 'bash' shell
-9.  ~/.bashrc.d/*.bash files  
-    sourced by ~/.bashrc
-10. /etc/bashrc  
-    sourced by ~/.bashrc
+|No. | File                     | Sourced by                    |
+|----|--------------------------|-------------------------------|
+|   1|/etc/profile              |'bash' or 'sh' shells          |
+|   2|~/.bash_profile           |'bash' shell                   |
+|   3|~/.profile.d/*.bash files |~/.bash_profile                |
+|   4|~/.profile                |~/.bash_profile or 'sh' shell  |
+|   5|~/.profile.d/*.sh files   |~/.profile                     |
+|   6|~/.shrc                   |~/.profile                     |
+|   7|~/.bashrc.d/*.sh files    |~/.shrc                        |
+|   8|~/.bashrc                 |~/.shrc, only if 'bash' shell  |
+|   9|~/.bashrc.d/*.bash files  |~/.bashrc                      |
+|  10|/etc/bashrc               |~/.bashrc                      |
 
 ##Usage
 When you want to add some configuration information
