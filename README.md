@@ -9,14 +9,13 @@ Configured to work on the following systems:
 * Linux (Raspian, Ubuntu)
 
 ##Startup file sourcing order
-1.  /etc/profile  
-    sourced by 'bash' or 'sh' shells
-2.  ~/.bash_profile  
-    sourced by 'bash'
-3.  ~/.profile.d/*.bash files  
-    sourced by ~/.bash_profile
-4.  ~/.profile  
-    sourced by ~/.bash_profile or 'sh' shell
+| File                      | Sourced by                    |
+|---------------------------|-------------------------------|
+|/etc/profile               |'bash' or 'sh' shells          |
+|~/.bash_profile            |'bash' shell                   |
+|~/.profile.d/*.bash files  |~/.bash_profile                |
+|~/.profile                 |~/.bash_profile or 'sh' shell  |
+
 5.  ~/.profile.d/*.sh files  
     sourced by ~/.profile
 6.  ~/.shrc  
