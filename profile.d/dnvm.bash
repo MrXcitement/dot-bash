@@ -5,6 +5,6 @@
 
 
 # Only source the dnvm file if it exists.
-if $(type dnvm.sh); then
+if hash dnvm.sh 2>/dev/null;  then
     . dnvm.sh
 fi
