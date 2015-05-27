@@ -10,9 +10,6 @@
 # Only if on an OSX system
 SYSTEM=$(uname -s)
 if [ "$SYSTEM" == "Darwin" ]; then
-    # Ony if brew cask is installed
-    if $(hash brew cask 2>/dev/null); then
-	echo "Configuring homebrew cask options..."
-	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-    fi
+    [ $DEBUG ] && echo "Configuring homebrew cask options..."
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
