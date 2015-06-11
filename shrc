@@ -3,11 +3,14 @@
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: May 4th, 2015
 
+# History
+# 2015-06-11 MRB
+# * No longer source the .bashrc file, handled by .bash_profile
+
 # Sourced by ~/.profile
 # Source ~/.bashrc.d/*.sh files
-# Source ~/.bashrc file, only if the current shell is bash.
 
-[ $DEBUG ] && echo "Loading .shrc"
+[ $DEBUG ] && echo "Loading $HOME/.shrc"
 
 # If not running interactively, just exit
 if [ -z "$PS1" ]; then
@@ -21,8 +24,3 @@ for script in $HOME/.bashrc.d/*.sh; do
 	. $script
     fi
 done
-
-# load the personal bashrc file if running bash and it exisits
-if [ "$BASH" ] && [ -r $HOME/.bashrc ]; then
-    . $HOME/.bashrc
-fi

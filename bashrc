@@ -3,11 +3,15 @@
 # Mike Mike <mike@thebarkers.com>
 # April 13th, 2013
 
-# Sourced by ~/.shrc if current shell is bash
+# History
+# 2015-06-11 MRB
+# * Sourced by .bash_profile now.
+
+# Sourced by ~/.bash_profile
 # Source /etc/bashrc
 # Source ~/.bashrc.d/*.bash files
 
-[ $DEBUG ] && echo "Loading .bashrc"
+[ $DEBUG ] && echo "Loading $BASH_SOURCE"
 
 # If not running interactively, just exit
 if [ -z "$PS1" ]; then

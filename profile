@@ -7,7 +7,7 @@
 # Source ~/.profile.d/*.sh files
 # Source ~/.shrc file
 
-[ $DEBUG ] && echo "Loading .profile"
+[ $DEBUG ] && echo "Loading $HOME/.profile"
 
 # Load the bash scripts in personal profile directory
 for script in $HOME/.profile.d/*.sh; do

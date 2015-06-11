@@ -13,14 +13,15 @@ Configured to work on the following systems:
 |---:|--------------------------|-------------------------------|
 |   1|/etc/profile              |'bash' or 'sh' shells          |
 |   2|~/.bash_profile           |'bash' shell                   |
-|   3|~/.profile.d/*.bash files |~/.bash_profile                |
-|   4|~/.profile                |~/.bash_profile or 'sh' shell  |
-|   5|~/.profile.d/*.sh files   |~/.profile                     |
-|   6|~/.shrc                   |~/.profile                     |
-|   7|~/.bashrc.d/*.sh files    |~/.shrc                        |
-|   8|~/.bashrc                 |~/.shrc, only if 'bash' shell  |
-|   9|~/.bashrc.d/*.bash files  |~/.bashrc                      |
-|  10|/etc/bashrc               |~/.bashrc                      |
+|   3|~/.profile                |~/.bash_profile or 'sh' shell  |
+|   4|~/.profile.d/*.sh files   |~/.profile                     |
+|   5|~/.shrc                   |~/.profile                     |
+|   6|~/.bashrc.d/*.sh files    |~/.shrc                        |
+|   7|~/.profile.d/*.bash files |~/.bash_profile                |
+|   8|~/.bashrc                 |~/.bash_profile                |
+|   9|/etc/bashrc               |~/.bashrc                      |
+|  10|~/.bashrc.d/*.bash files  |~/.bashrc                      |
+|----|--------------------------|-------------------------------|
 
 ##Usage
 When you want to add some configuration information
@@ -28,5 +29,5 @@ When you want to add some configuration information
 Put files that define environment variables and startup programs into the .profile.d direcotry.
 Put files that define aliases and functions into the .bashrc.d directory.
 
-Files that have the .bash extension will be loaded only if the current shell is 'bash'
-Files that hace the .sh extension will be loaded if the current shell is 'sh' or 'bash'
+Files with a '.bash' extension will be loaded if the current shell is 'bash'
+Files with a '.sh' extension will be loaded if the current shell is 'sh' or 'bash'

@@ -3,11 +3,22 @@
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: April 13th, 2013
 
-# Sourced by bash
-# Source ~/.profile.d/*.bash files
-# Source ~/.profile file
+# History
+# 2015-06-11 MRB
+# * Changed order of sourcing files so that .profile and .profile.d/*.sh get sourced first
+#   This was done in order to make sure that library functions get loaded before everthing else.
 
-[ $DEBUG ] && echo "Loading .bash_profile"
+# Sourced by bash
+# Source ~/.profile file
+# Source ~/.profile.d/*.bash files
+# Source ~/.bashrc file
+
+[ $DEBUG ] && echo "Loading $BASH_SOURCE"
+
+# Source the personal .profile file
+if [ -f "$HOME/.profile" ]; then
+    . $HOME/.profile
+fi
 
 # Load the bash scripts in the personal profile directory
 for script in $HOME/.profile.d/*.bash; do
@@ -17,7 +28,7 @@ for script in $HOME/.profile.d/*.bash; do
     fi
 done
 
-# Source the personal .profile file
-if [ -f "$HOME/.profile" ]; then
-    . $HOME/.profile
+# load the personal bashrc file
+if [ -r $HOME/.bashrc ]; then
+    . $HOME/.bashrc
 fi
