@@ -4,7 +4,7 @@
 # April 13th, 2013
 # Copyright (C) 2013-2014 Mike Barker
 
-[ $DEBUG ] && echo "Loading .bash_logout"
+[ $DEBUG ] && echo "Loading $BASH_SOURCE"
 
 # Cleanup when logging out
 if [ -n "$GNOME_KEYRING_PID" ]; then

@@ -10,6 +10,6 @@
 # Only if on an OSX system
 SYSTEM=$(uname -s)
 if [ "$SYSTEM" == "Darwin" ]; then
-    [ $DEBUG ] && echo "Configuring homebrew cask options..."
+    [ $DEBUG ] && echo "...Configuring homebrew cask options"
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
