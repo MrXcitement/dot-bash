@@ -16,11 +16,11 @@
 SSH_ENV="$HOME/.ssh/agent.env"
 
 function agent_has_keys() {
-    ssh-add -l >/dev/null 2>&1
+    ssh-add -l > /dev/null 2>&1
 }
 
 function agent_is_running() {
-    if [ "$SSH_AUTH_SOCK" ]; then
+    if [ -z "$SSH_AUTH_SOCK" ]; then
 	agent_has_keys || [ $? -eq 1 ]
     else
 	false
@@ -38,13 +38,16 @@ function agent_start() {
 
 if ! agent_is_running; then
     agent_load_env
+
 fi
 
 if ! agent_is_running; then
     agent_start
     ssh-add
+
 elif ! agent_has_keys; then
     ssh-add
+
 fi
 
 unset SSH_ENV
