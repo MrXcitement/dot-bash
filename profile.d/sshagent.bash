@@ -11,17 +11,17 @@
 # * Bug: the ssh-agent was loaded at every login, this caused it to be left in mem.
 # * Gnome keyring setup moved to it's own file gnome-keyring-daemon.sh
 
+# 2015.09.29 MRB
+# * No longer try to add keys by default. Once you are logged into your
+#   account you can run ssh-add to add any keys you wish to have loaded.
+
 # Note: ~/.ssh/environment should not be used, as it
 #       already has a different purpose in SSH.
 SSH_ENV="$HOME/.ssh/agent.env"
 
-function agent_has_keys() {
-    ssh-add -l > /dev/null 2>&1
-}
-
 function agent_is_running() {
-    if [ -z "$SSH_AUTH_SOCK" ]; then
-	agent_has_keys || [ $? -eq 1 ]
+    if [ "$SSH_AUTH_SOCK" ]; then
+	true
     else
 	false
     fi
@@ -33,21 +33,15 @@ function agent_load_env() {
 
 function agent_start() {
     (umask 077; ssh-agent > "$SSH_ENV")
-    agent_load_env
 }
 
 if ! agent_is_running; then
     agent_load_env
-
 fi
 
 if ! agent_is_running; then
     agent_start
-    ssh-add
-
-elif ! agent_has_keys; then
-    ssh-add
-
+    agent_load_env
 fi
 
 unset SSH_ENV
