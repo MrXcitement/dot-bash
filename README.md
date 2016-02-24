@@ -1,7 +1,5 @@
-#bashrc
-
-##Description
-My personal 'sh' and 'bash' shell configuration files.
+#dot-bash
+###My personal 'sh' and 'bash' shell configuration files.
 
 ##System
 Configured to work on the following systems:
