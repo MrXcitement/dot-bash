@@ -1,13 +1,7 @@
 # function to start vscode.app from the command line
 # https://code.visualstudio.com/Docs/setup
 
-VSCODE_APP="Visual Studio Code"
+# 2015.10.27 MRB
+# The way you launch Visual Studio Code from the command line has changed.
 
-vscode () {
-	if [[ $# = 0 ]]; then
-		open -a "$VSCODE_APP"
-	else
-		[[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
-		open -a "$VSCODE_APP" --args "$F"
-	fi
-}
+vscode () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
