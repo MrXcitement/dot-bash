@@ -8,6 +8,6 @@
 # 2014.10.30
 # * First release.
 
-if [[ `hostname -s` = pooh ]]; then
-    export VAGRANT_HOME=/Volumes/MyPassport01/vagrant/vagrant.d
-fi
+# if [[ `hostname -s` = pooh ]]; then
+#     export VAGRANT_HOME=/Volumes/MyPassport01/vagrant/vagrant.d
+# fi
