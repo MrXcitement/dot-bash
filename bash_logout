@@ -11,3 +11,5 @@ if [ -n "$GNOME_KEYRING_PID" ]; then
     killall gnome-keyring-daemon
     killall -9 dbus-launch
 fi
+
+echo "Goodbye, from bash..."
