@@ -27,7 +27,7 @@ fi
 # Load the bash scripts in personal bashrc.d directory
 for script in $HOME/.bashrc.d/*.bash; do
     if [ -r $script ]; then
-	[ $DEBUG ] && echo "Loading $script"
-	. $script
+	     [ $DEBUG ] && echo "Loading $script"
+    	  . $script
     fi
 done
