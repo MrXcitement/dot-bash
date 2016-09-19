@@ -1,5 +1,13 @@
 # set prompt: ``username@hostname$ ''
-if [ -z $BASH ]; then
-    PS1='`whoami`@`hostname`:$PWD
+
+CUR_SHELL=`ps -o command= -p $$` 
+NEW_PROMPT='[`whoami`@`hostname`] at $PWD 
 $ '
-fi
+
+case "$CUR_SHELL" in
+	*bash*) ;; 
+	*sh*) PS1=$NEW_PROMPT ;;
+	*) echo "unknown shell..." ;;
+esac
+
+#
