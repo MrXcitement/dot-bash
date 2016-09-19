@@ -9,11 +9,16 @@
 #   This was done in order to make sure that library functions get loaded before everthing else.
 
 # Sourced by bash
+# Source ~/.bashrc file
 # Source ~/.profile file
 # Source ~/.profile.d/*.bash files
-# Source ~/.bashrc file
 
 [ $DEBUG ] && echo "Loading $BASH_SOURCE"
+
+# load the personal bashrc file
+if [ -r $HOME/.bashrc ]; then
+    . $HOME/.bashrc
+fi
 
 # Source the personal .profile file
 if [ -f "$HOME/.profile" ]; then
@@ -28,7 +33,3 @@ for script in $HOME/.profile.d/*.bash; do
     fi
 done
 
-# load the personal bashrc file
-if [ -r $HOME/.bashrc ]; then
-    . $HOME/.bashrc
-fi
