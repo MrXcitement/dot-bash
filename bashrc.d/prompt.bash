@@ -214,7 +214,7 @@ PROMPT_COMMAND="history -a"
 
 # Now we construct the prompt.
 case ${TERM} in
-  *term* | rxvt | linux)
+  *term* | rxvt | linux | screen* )
         PS1="\[\$(load_color)\][\A\[${NC}\] "
 
         # Time of day (with load info):
