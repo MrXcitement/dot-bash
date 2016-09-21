@@ -8,6 +8,7 @@
 # * Sourced by .bash_profile now.
 
 # Sourced by ~/.bash_profile
+# Source ~/.shrc
 # Source /etc/bashrc
 # Source ~/.bashrc.d/*.bash files
 
@@ -18,13 +19,19 @@ if [ -z "$PS1" ]; then
     return
 fi
 
+# load the shrc script
+if [ -f "$HOME/.shrc" ]; then
+	[ $DEBUG ] && echo "Loading $HOME/.shrc"
+	. $HOME/.shrc
+fi
+
 # If the system bashrc file exist, load it.
 if [ -f "/etc/bashrc" ]; then
     [ $DEBUG ] && echo "Loading /etc/bashrc"
     . /etc/bashrc
 fi
 
-# Load the bash scripts in personal bashrc.d directory
+# Load the bash scripts in the personal .bashrc.d directory
 for script in $HOME/.bashrc.d/*.bash; do
     if [ -r $script ]; then
 	     [ $DEBUG ] && echo "Loading $script"
