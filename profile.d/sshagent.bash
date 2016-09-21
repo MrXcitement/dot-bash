@@ -20,28 +20,45 @@
 SSH_ENV="$HOME/.ssh/agent.env"
 
 function agent_is_running() {
-    if [ "$SSH_AUTH_SOCK" ]; then
-	true
-    else
-	false
-    fi
+	if [ "$SSH_AUTH_SOCK" ]; then
+		true
+	else
+		false
+	fi
 }
 
 function agent_load_env() {
-    source "$SSH_ENV" > /dev/null
+	if [ -f "$SSH_ENV" ]; then
+		source "$SSH_ENV" > /dev/null
+	fi
 }
 
 function agent_start() {
-    (umask 077; ssh-agent > "$SSH_ENV")
+	(umask 077; ssh-agent > "$SSH_ENV")
 }
 
-if ! agent_is_running; then
-    agent_load_env
-fi
+function sshagent_main() {
+	echo 'Loading ssh-agent...'
+	if ! agent_is_running; then
+		agent_load_env
+	fi
 
-if ! agent_is_running; then
-    agent_start
-    agent_load_env
+	if ! agent_is_running; then
+		agent_start
+		agent_load_env
+	fi
+}
+
+function keychain_main() {
+	echo 'Loading keychain...'
+	keychain $HOME/.ssh/id_rsa
+	source $HOME/.keychain/$HOSTNAME-sh
+}
+
+if [ -x "$(command -v keychain)" ]; then
+	keychain_main
+else
+	sshagent_main
 fi
 
 unset SSH_ENV
