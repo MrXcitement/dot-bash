@@ -108,9 +108,9 @@ if [[ ${System} == "Linux" ]]; then
 
 elif [[ ${System} == "Darwin" ]]; then
     NCPU=$(sysctl -n machdep.cpu.core_count)
-    SLOAD=$(( 25 ))		# Small load
-    MLOAD=$(( 50 ))        	# Medium load
-    XLOAD=$(( 80 ))        	# Xlarge load
+    SLOAD=$(( 25 ))         # Small load
+    MLOAD=$(( 50 ))         # Medium load
+    XLOAD=$(( 80 ))         # Xlarge load
 
 else
     NCPU=1
@@ -123,11 +123,11 @@ fi
 function load()
 {
     if [[ ${System} == "Linux" ]]; then
-	local SYSLOAD=$(cut -d " " -f1 /proc/loadavg | tr -d '.')
+        local SYSLOAD=$(cut -d " " -f1 /proc/loadavg | tr -d '.')
     elif [[ ${System} == "Darwin" ]]; then
-    	local SYSLOAD=$(sysctl -n vm.loadavg | cut -d " " -f2)
+        local SYSLOAD=$(sysctl -n vm.loadavg | cut -d " " -f2)
     else
-	local SYSLOAD=01
+        local SYSLOAD=01
     fi
     # System load of the current host.
     echo $SYSLOAD | awk '{printf("%d",$1 * 10)}'       # Convert to decimal.
@@ -151,13 +151,14 @@ function load_color()
 # Returns a color according to free disk space in $PWD.
 function disk_color()
 {
+    # No 'write' privilege in the current directory.
     if [ ! -w "${PWD}" ] ; then
         printf ${Red}
-        # No 'write' privilege in the current directory.
+    # Check free space and set color accordingly
     elif [ -s "${PWD}" ] ; then
         local used=$(command df -P "$PWD" |
-                   awk 'END {print $5}' |
-		   awk '{sub(/%/,""); print}')
+                     awk 'END {print $5}' |
+                     awk '{sub(/%/,""); print}')
         if [ ${used} -gt 95 ]; then
             printf ${ALERT}           # Disk almost full (>95%).
         elif [ ${used} -gt 90 ]; then
@@ -165,82 +166,103 @@ function disk_color()
         else
             printf ${Green}           # Free disk space is ok.
         fi
+    # Current directory is size '0' (like /proc, /sys etc).
     else
         printf ${Cyan}
-        # Current directory is size '0' (like /proc, /sys etc).
     fi
 }
 
 # Returns a color according to running/suspended jobs.
 function job_color()
 {
-    if [ $(jobs -s | wc -l) -gt "0" ]; then
+    if [[ $(jobs -s | wc -l) -gt "0" ]]; then
         printf ${BRed}
-    elif [ $(jobs -r | wc -l) -gt "0" ] ; then
+    elif [[ $(jobs -r | wc -l) -gt "0" ]] ; then
         printf ${BCyan}
     fi
 }
 
-# Add git branch if available
+##
+# Add git status if available
+
+# Source the git-prompt.sh support file
+GIT_PROMPT=""
+if [[ ${System} == "Linux" ]]; then
+    GIT_PROMPT=/etc/bash_completion.d/git-prompt.sh
+elif [[ ${System} == "Darwin" ]]; then
+    GIT_PROMPT=/usr/local/etc/bash_completion.d/git-prompt.sh
+fi
+if [[ -f ${GIT_PROMPT} ]]; then
+    source ${GIT_PROMPT}
+fi
+
+# non empty value to turn on
+# * - unstaged, % - staged changes
+export GIT_PS1_SHOWDIRTYSTATE=true
+
+# non empty value to turn on
+# $ - stashed item(s)
+export GIT_PS1_SHOWSTASHSTATE=true
+
+# non empty value to turn on
+# % - untracked files
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+
+# can be: "auto" or any of "versbose lagcy git svn"
+# < - HEAD is behind upstream
+# > - HEAD is ahead of upstream
+# <> - HEAD has diverged from upstream
+# = - HEAD is the same as upstream
+export GIT_PS1_SHOWUPSTREAM="auto"
+
+# show more info regarding commits of a detached HEAD
+# can be: contains branch describe default
+#export GIT_PS1_DESCRIBE_STYLE="default"
+
+# non empty value will colorize the prompt
+# this only works when using PROMPT_COMMAND
+#export GIT_PS1_SHOWCOLORHINTS="true"
+
 function git_branch()
 {
-    # non empty value to turn on
-    # * - unstaged, % - staged changes
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    # non empty value to turn on
-    # $ - stashed item(s)
-    export GIT_PS1_SHOWSTASHSTATE=true
-    # non empty value to turn on
-    # % - untracked files
-    export GIT_PS1_SHOWUNTRACKEDFILES=true
-    # can be: "auto" or any of "versbose lagcy git svn"
-    # < - HEAD is behind upstream
-    # > - HEAD is ahead of upstream
-    # <> - HEAD has diverged from upstream
-    # = - HEAD is the same as upstream
-    export GIT_PS1_SHOWUPSTREAM="auto"
-    # show more info regarding commits of a detached HEAD
-    # can be: contains branch describe default
-    #export GIT_PS1_DESCRIBE_STYLE="default"
-    # non empty value will colorize the prompt
-    # this only works when using PROMPT_COMMAND
-    #export GIT_PS1_SHOWCOLORHINTS="true"
-    declare -F __git_ps1 &>/dev/null && __git_ps1 || printf ""
+    if [[ $(declare -F __git_ps1) ]]; then
+        __git_ps1 " at (%s)" 
+    else
+        ""
+    fi
 }
 
 # Run this everytime we show the prompt
 PROMPT_COMMAND="history -a"
 
-
 # Now we construct the prompt.
 case ${TERM} in
-  *term* | rxvt | linux | screen* )
-        PS1="\[\$(load_color)\][\A\[${NC}\] "
+    *term* | rxvt | linux | screen* )
 
-        # Time of day (with load info):
-        PS1="[\[\$(load_color)\]\A\[${NC}\] "
+        # History entry number (with load info):
+        PS1="[\[\$(load_color)\]!\!:\#\[${NC}\]] "
 
         # User@Host (with connection type info):
-        PS1=${PS1}"\[${SU}\]\u\[${NC}\]@\[${CNX}\]\h\[${NC}\] "
+        PS1=${PS1}"\[${SU}\]\u\[${NC}\]@\[${CNX}\]\h\[${NC}\] in "
 
         # PWD (with 'disk space' info):
-	    PS1=${PS1}"\[\$(disk_color)\]\W\[${NC}\]"
+        PS1=${PS1}"\[\$(disk_color)\]\W\[${NC}\]"
 
-	    # Github branch:
-	    PS1=${PS1}"\$(git_branch)]"
+        # Github branch:
+        PS1=${PS1}"\$(git_branch)"
 
-	    # Prompt (with 'job' info):
+        # Prompt (with 'job' info):
         PS1=${PS1}"\n\[\$(job_color)\]\$\[${NC}\] "
 
-	    # Set title of current xterm:
+        # Set title of current xterm:
         case $TERM in
-			xterm*)
-				PS1=${PS1}"\[\e]0;[\u@\h] \w\$(git_branch)\a\]"
-			;;
-		esac
-		;;
+            xterm*)
+                PS1=${PS1}"\[\e]0;[\u@\h] \w\$(git_branch)\a\]"
+                ;;
+        esac
+        ;;
     *)
-	# --> Shows full pathname of current dir.
-	PS1="[\A \u@\h \w \$(git_branch)]\n\$ "
-    ;;
+        # --> Shows full pathname of current dir.
+        PS1="[\A \u@\h \w \$(git_branch)]\n\$ "
+        ;;
 esac
