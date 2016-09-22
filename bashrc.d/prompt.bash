@@ -49,8 +49,11 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 #       http://tldp.org/HOWTO/Bash-Prompt-HOWTO
 #       https://github.com/nojhan/liquidprompt
 #-------------------------------------------------------------
-# Current Format: [TIME USER@HOST PWD] >
-# TIME:
+# Current Format:
+# USER@HOST in PWD <at (git status)>
+# HISTORY:$ _
+#
+# HISTORY:
 #    Green     == machine load is low
 #    Orange    == machine load is medium
 #    Red       == machine load is high
@@ -69,7 +72,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 #    ALERT     == less than 5% free disk space
 #    Red       == current user does not have write privileges
 #    Cyan      == current filesystem is size zero (like /proc)
-# >:
+# $:
 #    White     == no background or suspended jobs in this shell
 #    Cyan      == at least one background job in this shell
 #    Orange    == at least one suspended job in this shell
@@ -238,9 +241,7 @@ PROMPT_COMMAND="history -a"
 # Now we construct the prompt.
 case ${TERM} in
     *term* | rxvt | linux | screen* )
-
-        # History entry number (with load info):
-        PS1="[\[\$(load_color)\]!\!:\#\[${NC}\]] "
+        PS1=""
 
         # User@Host (with connection type info):
         PS1=${PS1}"\[${SU}\]\u\[${NC}\]@\[${CNX}\]\h\[${NC}\] in "
@@ -251,8 +252,14 @@ case ${TERM} in
         # Github branch:
         PS1=${PS1}"\$(git_branch)"
 
+        # Newline
+        PS1=${PS1}"\n"
+
+        # History entry number (with load info):
+        PS1=${PS1}"[\[\$(load_color)\]\!\[${NC}\]] "
+
         # Prompt (with 'job' info):
-        PS1=${PS1}"\n\[\$(job_color)\]\$\[${NC}\] "
+        PS1=${PS1}"\[\$(job_color)\]\$\[${NC}\] "
 
         # Set title of current xterm:
         case $TERM in
