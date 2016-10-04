@@ -10,10 +10,13 @@
 # History:
 # 2015.05.08
 # * First release.
+# 2016.10.04
+# Check if aws cli is installed
 
-
-credentials="/Users/mike/.aws/credentials"
-if [ -f $credentials ]; then
-	export AWS_CREDENTIAL_FILE=$credentials
-	complete -C `which aws_completer` aws
+if [[ $(type -P aws) ]]; then
+    credentials="/Users/mike/.aws/credentials"
+    if [ -f $credentials ]; then
+        export AWS_CREDENTIAL_FILE=$credentials
+        complete -C `which aws_completer` aws
+    fi
 fi
