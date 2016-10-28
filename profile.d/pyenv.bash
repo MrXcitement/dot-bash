@@ -8,6 +8,11 @@ if [[ $(type -P "pyenv") ]]; then
     export PATH="${PYENV_ROOT}/bin:${PATH}"
     eval "$(pyenv init -)"
 
+    # Initialize pyenv's virtualenv plugin, if installed
+    if [[ $(type -P pyenv-virtualenv-init ) ]]; then
+        eval "$(pyenv virtualenv-init -)"
+    fi
+
     # Initalize pyenv's virtualenvwrapper tool only if pyenv-virtualenvwrapper is installed
     if [[ $(type -P pyenv-sh-virtualenvwrapper ) ]]; then
         export WORKON_HOME=${HOME}/.virtualenvs
