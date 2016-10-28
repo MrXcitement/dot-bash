@@ -20,13 +20,8 @@ if [ -r $HOME/.bashrc ]; then
     . $HOME/.bashrc
 fi
 
-# Source the personal .profile file
-if [ -f "$HOME/.profile" ]; then
-    . $HOME/.profile
-fi
-
-# Load the bash scripts in the personal profile directory
-for script in $HOME/.profile.d/*.bash; do
+# Load the sh and bash scripts in the personal profile directory
+for script in $HOME/.profile.d/*.{sh,bash}; do
     if [ -r $script ]; then
 	[ $DEBUG ] && echo "Loading $script"
 	. $script
