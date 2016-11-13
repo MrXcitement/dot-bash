@@ -19,7 +19,7 @@
 # November 11th, 2016
 
 clean_cowfile() {
-    cowfile=$1
+    local cowfile=$1
     if [ "$1" == "sodomized.cow" ] ||
         [ "$1" == "telebears.cow" ] ||
         [ "$1" == "head-in.cow" ]; then
@@ -29,6 +29,7 @@ clean_cowfile() {
 }
 
 get_shuffle() {
+    local shuffle=""
     if [ "$(uname)" == "Darwin" ]; then
         shuffle=gshuf
     else
@@ -37,6 +38,7 @@ get_shuffle() {
     echo ${shuffle}
 }
 get_cowpath() {
+    local cowpath=""
     if [ "$(uname)" == "Darwin" ]; then
         cowpath=/usr/local/share/cows
     else
@@ -46,6 +48,7 @@ get_cowpath() {
 }
 
 get_cowfile() {
+    local cowfile=""
     if [ "$1" == "" ]; then
         cowfile=$(ls $(get_cowpath)/*cow | \
                   xargs -n1 basename | \
