@@ -38,7 +38,7 @@ get_shuffle() {
 }
 get_cowpath() {
     if [ "$(uname)" == "Darwin" ]; then
-        cowpath=/usr/local/Cellar/cowsay/3.04/share/cows
+        cowpath=/usr/local/share/cows
     else
         cowpath=/usr/share/cowsay/cows
     fi
