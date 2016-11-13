@@ -13,14 +13,16 @@
 # file, this script will replace it with the default.cow file.
 
 # parameters:
-# -c <cow file> or --cowfile <cow file>
+# -c <cow file>
 
 # Mike Barker <mike@thebarkers.com>
 # November 11th, 2016
 
 clean_cowfile() {
     cowfile=$1
-    if [ "$1" == "sodomized.cow" ]; then
+    if [ "$1" == "sodomized.cow" ] ||
+        [ "$1" == "telebears.cow" ] ||
+        [ "$1" == "head-in.cow" ]; then
         cowfile="default.cow"
     fi
     echo ${cowfile}
