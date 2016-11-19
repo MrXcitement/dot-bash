@@ -1,6 +1,8 @@
 # Command aliases for emacs
 alias e='emacs'
-alias en='emacs -nw'
-alias ec='emacsclient'
-alias ecn='emacsclient -nw'
+alias en='e -nw'
+alias ec='emacsclient -a ""'
+alias ecn='ec -nw'
+alias ecc='ec -c'
+alias ect='ec -t'
 
