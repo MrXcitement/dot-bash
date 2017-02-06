@@ -6,7 +6,7 @@
 if [ $(type -P tmux) ] && [ -z "${TMUX+x}" ]; then
     data=$(tmux ls 2>/dev/null)
     if [ $? = 0 ]; then
-        echo 'tmux status:'
+        echo 'tmux sessions:'
         echo $data
     fi
 fi
