@@ -4,6 +4,9 @@
 # September 30th 2016
 
 if [ $(type -P tmux) ] && [ -z "${TMUX+x}" ]; then
-    echo 'tmux status:'
-    tmux ls
+    data=$(tmux ls 2>/dev/null)
+    if [ $? = 0 ]; then
+        echo 'tmux status:'
+        echo $data
+    fi
 fi
