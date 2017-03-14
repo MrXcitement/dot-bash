@@ -94,13 +94,18 @@ else
 fi
 
 # Test user type:
-if [[ ${USER} == "root" ]]; then
+user_name=$(logname > /dev/null 2>&1)
+if [[ $? -ne 0 ]]; then
+   user_name=$USER
+fi
+if [ ${USER} = "root" ]; then
     SU=${Red}           # User is root.
-elif [[ ${USER} != $(logname) ]]; then
+elif [ ! "${USER}" = "$user_name" ]; then
     SU=${BRed}          # User is not login user.
 else
     SU=${BCyan}         # User is normal (well ... most of us are).
 fi
+unset user_name
 
 # Get number of CPUs on system
 if [[ ${System} == "Linux" ]]; then
@@ -123,8 +128,7 @@ else
 fi
 
 # Returns system load as percentage, i.e., '40' rather than '0.40)'.
-function load()
-{
+load() {
     if [[ ${System} == "Linux" ]]; then
         local SYSLOAD=$(cut -d " " -f1 /proc/loadavg | tr -d '.')
     elif [[ ${System} == "Darwin" ]]; then
@@ -137,8 +141,7 @@ function load()
 }
 
 # Returns a color indicating system load.
-function load_color()
-{
+load_color() {
     local SYSLOAD=$(load)
     if [ ${SYSLOAD} -gt ${XLOAD} ]; then
         printf ${ALERT}
@@ -152,8 +155,7 @@ function load_color()
 }
 
 # Returns a color according to free disk space in $PWD.
-function disk_color()
-{
+disk_color() {
     # No 'write' privilege in the current directory.
     if [ ! -w "${PWD}" ] ; then
         printf ${Red}
@@ -176,8 +178,7 @@ function disk_color()
 }
 
 # Returns a color according to running/suspended jobs.
-function job_color()
-{
+job_color() {
     if [[ $(jobs -s | wc -l) -gt "0" ]]; then
         printf ${BRed}
     elif [[ $(jobs -r | wc -l) -gt "0" ]] ; then
@@ -226,12 +227,11 @@ export GIT_PS1_SHOWUPSTREAM="auto"
 # this only works when using PROMPT_COMMAND
 #export GIT_PS1_SHOWCOLORHINTS="true"
 
-function git_branch()
-{
+git_branch() {
     if [[ $(declare -F __git_ps1) ]]; then
         __git_ps1 " at (%s)" 
     else
-        ""
+        printf ""
     fi
 }
 
