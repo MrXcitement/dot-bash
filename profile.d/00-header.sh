@@ -1,5 +1,4 @@
 # Display the bash version and DISPLAY setting
-#if [ "$BASH" != "" ] || [ "$0" == "bash" ]; then
 if [ -n "$BASH" ]; then
     # Display the bash version and DISPLAY setting
     printf "${BBlue}This is BASH ${BRed}${BASH_VERSION%.*}${NC}\n"
