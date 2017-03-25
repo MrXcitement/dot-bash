@@ -1,4 +1,4 @@
-# 10-header-fortune.sh --- print out a random fortune, use cowsay if installed
+# 10-header-fortune.bash --- print out a random fortune, use cowsay if installed
 
 # This script will check for the fortune program and use it to
 # retrieve a random fortune to be displayed.
@@ -23,7 +23,7 @@ _BAD_COWS=("sodomized.cow telebears.cow head-in.cow")
 
 replace_bad_cowfile() {
     local cowfile=$1
-    if [ " ${_BAD_COWS[@]} " =~ " $1 " ]; then
+    if [[ " ${_BAD_COWS[@]} " =~ " $1 " ]]; then
         cowfile="default.cow"
     fi
     echo ${cowfile}
@@ -31,7 +31,7 @@ replace_bad_cowfile() {
 
 get_shuffle() {
     local shuffle=""
-    if [ "$(uname)" = "Darwin" ]; then
+    if [[ "$(uname)" = "Darwin" ]]; then
         shuffle=gshuf
     else
         shuffle=shuf
@@ -41,7 +41,7 @@ get_shuffle() {
 
 get_cowpath() {
     local cowpath=""
-    if [ "$(uname)" = "Darwin" ]; then
+    if [[ "$(uname)" = "Darwin" ]]; then
         cowpath=/usr/local/share/cows
     else
         cowpath=/usr/share/cowsay/cows
@@ -50,7 +50,7 @@ get_cowpath() {
 }
 
 get_cowfile() {
-    if [ "$_COWFILE" = "" ]; then
+    if [[ "$_COWFILE" = "" ]]; then
         cowfile=$(ls $(get_cowpath)/*.cow | \
                   xargs -n1 basename | \
                   $(get_shuffle) -n1)
