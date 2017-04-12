@@ -14,7 +14,11 @@
 # Source ~/.profile.d/*.bash files
 
 [ $DEBUG ] && echo "Loading $BASH_SOURCE"
-eval $(/usr/libexec/path_helper -s)
+
+# macOS: add defined paths and manpaths from /etc/paths.d and /etc/manpaths.d
+if [[ -x "/usr/libexec/path_helper" ]]; then
+    eval $(/usr/libexec/path_helper -s)
+fi
 
 # load the personal bashrc file
 if [ -r $HOME/.bashrc ]; then
