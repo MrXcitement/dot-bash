@@ -14,6 +14,7 @@
 # Source ~/.profile.d/*.bash files
 
 [ $DEBUG ] && echo "Loading $BASH_SOURCE"
+eval $(/usr/libexec/path_helper -s)
 
 # load the personal bashrc file
 if [ -r $HOME/.bashrc ]; then
@@ -27,5 +28,3 @@ for script in $HOME/.profile.d/*.{sh,bash}; do
 	. $script
     fi
 done
-
-#_byobu_sourced=1 . /usr/local/Cellar/byobu/5.108/bin/byobu-launch 2>/dev/null || true
