@@ -6,3 +6,9 @@
 function title {
     echo -ne "\033k"$*"\033\\"
 }
+
+# make a directory and then change into it
+function mkcd {
+    mkdir -p "$@"
+    cd "$@"
+}
