@@ -22,7 +22,7 @@ for FILE in bash* inputrc profile* shrc; do
     fi
     if ! [ -a ~/.${FILE} ]; then
         echo "Linking file ${FILE}"
-        ln -sv ${DIR}/${FILE} ~/.${FILE}
+        ln -sfnv ${DIR}/${FILE} ~/.${FILE}
     fi
 done
 popd > /dev/null
