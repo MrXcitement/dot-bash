@@ -1,12 +1,12 @@
-#dot-bash
-###My personal 'sh' and 'bash' shell configuration files.
+# dot-bash
+My personal 'sh' and 'bash' shell configuration files.
 
-##System
+## System
 Configured to work on the following systems:
 * OS X 10.9+
 * Linux (Raspian, Ubuntu)
 
-##Startup file sourcing order
+## Startup file sourcing order
 |No. | File                     | Sourced by                    |
 |---:|--------------------------|-------------------------------|
 |   1|/etc/profile              |'bash' or 'sh' shells          |
@@ -21,7 +21,7 @@ Configured to work on the following systems:
 |  10|~/.bashrc.d/*.bash files  |~/.bashrc                      |
 |----|--------------------------|-------------------------------|
 
-##Usage
+## Usage
 When you want to add some configuration information
 
 Put files that define environment variables and startup programs into the .profile.d direcotry.
