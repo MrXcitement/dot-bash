@@ -1,4 +1,4 @@
-# bluemix.bash --- Configure the homebrew package system
+# bluemix.bash --- Configure the bluemix cli
 
 # Author: Mike Barker <mike@thebarkers.com>
 # Created: October 26th, 2017
