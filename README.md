@@ -19,7 +19,6 @@ Configured to work on the following systems:
 |   8|~/.bashrc                 |~/.bash_profile                |
 |   9|/etc/bashrc               |~/.bashrc                      |
 |  10|~/.bashrc.d/*.bash files  |~/.bashrc                      |
-|----|--------------------------|-------------------------------|
 
 ## Usage
 When you want to add some configuration information
