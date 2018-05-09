@@ -82,7 +82,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 
 
 # Test connection type:
-if [ -n "${SSH_CONNECTION}" ]; then
+if [[ -n "${SSH_CONNECTION}" ]]; then
     CNX=${Green}        # Connected on remote machine, via ssh (good).
 elif [[ (${DISPLAY} == *:0) && \
         (${DISPLAY} != *xquartz:0) && \
@@ -94,13 +94,13 @@ else
 fi
 
 # Test user type:
-user_name=$(logname > /dev/null 2>&1)
+user_name=$(logname)
 if [[ $? -ne 0 ]]; then
    user_name=$USER
 fi
-if [ ${USER} = "root" ]; then
+if [[ ${USER} = "root" ]]; then
     SU=${Red}           # User is root.
-elif [ ! "${USER}" = "$user_name" ]; then
+elif [[ ! "${USER}" = "$user_name" ]]; then
     SU=${BRed}          # User is not login user.
 else
     SU=${BCyan}         # User is normal (well ... most of us are).
@@ -143,11 +143,11 @@ load() {
 # Returns a color indicating system load.
 load_color() {
     local SYSLOAD=$(load)
-    if [ ${SYSLOAD} -gt ${XLOAD} ]; then
+    if [[ ${SYSLOAD} -gt ${XLOAD} ]]; then
         printf ${ALERT}
-    elif [ ${SYSLOAD} -gt ${MLOAD} ]; then
+    elif [[ ${SYSLOAD} -gt ${MLOAD} ]]; then
         printf ${Red}
-    elif [ ${SYSLOAD} -gt ${SLOAD} ]; then
+    elif [[ ${SYSLOAD} -gt ${SLOAD} ]]; then
         printf ${BRed}
     else
         printf ${Green}
@@ -157,16 +157,16 @@ load_color() {
 # Returns a color according to free disk space in $PWD.
 disk_color() {
     # No 'write' privilege in the current directory.
-    if [ ! -w "${PWD}" ] ; then
+    if [[ ! -w "${PWD}" ]]; then
         printf ${Red}
     # Check free space and set color accordingly
-    elif [ -s "${PWD}" ] ; then
+    elif [[ -s "${PWD}" ]]; then
         local used=$(command df -P "$PWD" |
                      awk 'END {print $5}' |
                      awk '{sub(/%/,""); print}')
-        if [ ${used} -gt 95 ]; then
+        if [[ ${used} -gt 95 ]]; then
             printf ${ALERT}           # Disk almost full (>95%).
-        elif [ ${used} -gt 90 ]; then
+        elif [[ ${used} -gt 90 ]]; then
             printf ${BRed}            # Free disk space almost gone.
         else
             printf ${Green}           # Free disk space is ok.
