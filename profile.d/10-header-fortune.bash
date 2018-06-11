@@ -4,10 +4,11 @@
 # retrieve a random fortune to be displayed.
 
 # If the cowsay program is installed, cowsay will be used to print
-# the fortune with a random cow selected.
+# the fortune.
 
-# If a cow file is provided, then it will be used instead of a random
-# cow file instead.
+# If the shufl or gshufl program is installed a random cow will be used.
+
+# If a cow file is provided, then it will be used instead.
 
 # If the cow file selected or requested is in the _BAD_COWS
 # array, it will be replaced with the default.cow file.
@@ -17,6 +18,10 @@
 
 # Mike Barker <mike@thebarkers.com>
 # November 11th, 2016
+
+# MRB 2018.06.11
+# Fix bug when no shuffle program instaled.
+# if no shuffle program always use the default cow.
 
 _COWFILE=""
 _BAD_COWS=("sodomized.cow telebears.cow head-in.cow")
@@ -36,6 +41,9 @@ get_shuffle() {
     else
         shuffle=shuf
     fi
+    if ! type ${shuffle} >/dev/null 2>&1; then
+        shuffle=""
+    fi
     echo ${shuffle}
 }
 
@@ -50,10 +58,13 @@ get_cowpath() {
 }
 
 get_cowfile() {
+    local cowfile="default.cow"
     if [[ "$_COWFILE" = "" ]]; then
-        cowfile=$(ls $(get_cowpath)/*.cow | \
-                  xargs -n1 basename | \
-                  $(get_shuffle) -n1)
+        if [[ -n $(get_shuffle) ]]; then
+            cowfile=$(ls $(get_cowpath)/*.cow | \
+                      xargs -n1 basename | \
+                      $(get_shuffle) -n1)
+        fi
     else
         cowfile=$_COWFILE
     fi
