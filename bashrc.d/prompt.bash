@@ -1,7 +1,41 @@
 # prompt.bash -- Configure the bash prompt
 
-# Get the system name
-System=`uname -s`
+# Shell Prompt - for many examples, see:
+#       http://www.debian-administration.org/articles/205
+#       http://www.askapache.com/linux/bash-power-prompt.html
+#       http://tldp.org/HOWTO/Bash-Prompt-HOWTO
+#       https://github.com/nojhan/liquidprompt
+#-------------------------------------------------------------
+# Current Format:
+# USER@HOST in PWD <at (git status)>
+# HISTORY:$ _
+#
+# HISTORY:
+#    Green     == machine load is low
+#    Orange    == machine load is medium
+#    Red       == machine load is high
+#    ALERT     == machine load is very high
+# USER:
+#    BBlue      == normal user
+#    Orange    == SU to user
+#    Red       == root
+# HOST:
+#    BBlue      == local session
+#    BCyan      == secured remote connection (via ssh)
+#    Red       == unsecured remote connection
+# PWD:
+#    Green     == more than 10% free disk space
+#    Orange    == less than 10% free disk space
+#    ALERT     == less than 5% free disk space
+#    Red       == current user does not have write privileges
+#    Cyan      == current filesystem is size zero (like /proc)
+# $:
+#    White     == no background or suspended jobs in this shell
+#    Cyan      == at least one background job in this shell
+#    Orange    == at least one suspended job in this shell
+#
+#    Command is added to the history file each time you hit enter,
+#    so it's available to all shells (using 'history -a').
 
 # Color definitions (taken from Color Bash Prompt HowTo).
 # Some colors might look different of some terminals.
@@ -43,55 +77,8 @@ NC="\e[m"               # Color Reset
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
 #-------------------------------------------------------------
-# Shell Prompt - for many examples, see:
-#       http://www.debian-administration.org/articles/205
-#       http://www.askapache.com/linux/bash-power-prompt.html
-#       http://tldp.org/HOWTO/Bash-Prompt-HOWTO
-#       https://github.com/nojhan/liquidprompt
-#-------------------------------------------------------------
-# Current Format:
-# USER@HOST in PWD <at (git status)>
-# HISTORY:$ _
-#
-# HISTORY:
-#    Green     == machine load is low
-#    Orange    == machine load is medium
-#    Red       == machine load is high
-#    ALERT     == machine load is very high
-# USER:
-#    Cyan      == normal user
-#    Orange    == SU to user
-#    Red       == root
-# HOST:
-#    Cyan      == local session
-#    Green     == secured remote connection (via ssh)
-#    Red       == unsecured remote connection
-# PWD:
-#    Green     == more than 10% free disk space
-#    Orange    == less than 10% free disk space
-#    ALERT     == less than 5% free disk space
-#    Red       == current user does not have write privileges
-#    Cyan      == current filesystem is size zero (like /proc)
-# $:
-#    White     == no background or suspended jobs in this shell
-#    Cyan      == at least one background job in this shell
-#    Orange    == at least one suspended job in this shell
-#
-#    Command is added to the history file each time you hit enter,
-#    so it's available to all shells (using 'history -a').
-
-
-# Test connection type:
-if [[ -n "${SSH_CONNECTION}" ]]; then
-    CNX=${Green}        # Connected on remote machine, via ssh (good).
-elif [[ (${DISPLAY} == *:0) && \
-        (${DISPLAY} != *xquartz:0) && \
-        (${DISPLAY} != *org.x:0) && \
-        (${DISPLAY} != :0) ]]; then
-    CNX=${ALERT}        # Connected on remote machine, not via ssh (bad).
-else
-    CNX=${BCyan}        # Connected on local machine.
-fi
+# Get the system name
+System=`uname -s`
 
 # Test user type:
 user_name=$(logname)
@@ -103,9 +90,21 @@ if [[ ${USER} = "root" ]]; then
 elif [[ ! "${USER}" = "$user_name" ]]; then
     SU=${BRed}          # User is not login user.
 else
-    SU=${BCyan}         # User is normal (well ... most of us are).
+    SU=${BBlue}          # User is normal (well ... most of us are).
 fi
 unset user_name
+
+# Test connection type:
+if [[ -n "${SSH_CONNECTION}" ]]; then
+    CNX=${BCyan}        # Connected on remote machine, via ssh (good).
+elif [[ (${DISPLAY} == *:0) && \
+        (${DISPLAY} != *xquartz:0) && \
+        (${DISPLAY} != *org.x:0) && \
+        (${DISPLAY} != :0) ]]; then
+    CNX=${ALERT}        # Connected on remote machine, not via ssh (bad).
+else
+    CNX=${BBlue}        # Connected on local machine.
+fi
 
 # Get number of CPUs on system
 if [[ ${System} == "Linux" ]]; then
