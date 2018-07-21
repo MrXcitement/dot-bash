@@ -190,14 +190,16 @@ job_color() {
 # Add git status if available
 
 # Source the git-prompt.sh support file
-GIT_PROMPT=""
-if [[ ${System} == "Linux" ]]; then
-    GIT_PROMPT=/etc/bash_completion.d/git-prompt.sh
-elif [[ ${System} == "Darwin" ]]; then
-    GIT_PROMPT=/usr/local/etc/bash_completion.d/git-prompt.sh
-fi
-if [[ -f ${GIT_PROMPT} ]]; then
-    source ${GIT_PROMPT}
+if [[ ! $(declare -F __git_ps1) ]]; then
+    GIT_PROMPT=""
+    if [[ ${System} == "Linux" ]]; then
+        GIT_PROMPT=/etc/bash_completion.d/git-prompt
+    elif [[ ${System} == "Darwin" ]]; then
+        GIT_PROMPT=/usr/local/etc/bash_completion.d/git-prompt.sh
+    fi
+    if [[ -f ${GIT_PROMPT} ]]; then
+        source ${GIT_PROMPT}
+    fi
 fi
 
 # non empty value to turn on
