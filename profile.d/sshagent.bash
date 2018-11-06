@@ -34,6 +34,9 @@ function agent_load_env() {
 }
 
 function agent_start() {
+	if [ ! -d "$HOME/.ssh" ]; then
+		mkdir "$HOME/.ssh"
+	fi
 	(umask 077; ssh-agent > "$SSH_ENV")
 }
 
