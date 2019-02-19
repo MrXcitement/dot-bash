@@ -4,5 +4,8 @@
 
 
 if [[ "$(uname)" = "Darwin" ]]; then
-    pathprepend "$HOME/Library/Python/2.7/bin"
+    for p in $HOME/Library/Python/*/bin
+    do
+        pathprepend $p
+    done
 fi
