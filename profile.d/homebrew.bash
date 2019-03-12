@@ -10,6 +10,6 @@
 # Only if on an OSX system and homebrew installed
 SYSTEM=$(uname -s)
 if [[ "$SYSTEM" == "Darwin" && $(command -v brew) ]]; then
-    [[ -n $DEBUG ]] && echo "...Configuring homebrew cask options"
+    [ ${DEBUG} ] && echo "...Configuring homebrew cask options" >&2
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi

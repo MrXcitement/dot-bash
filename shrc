@@ -10,7 +10,7 @@
 # Sourced by ~/.profile
 # Source ~/.bashrc.d/*.sh files
 
-[ $DEBUG ] && echo "Loading $HOME/.shrc"
+[ ${DEBUG} ] && echo "[${HOME}/.shrc]" >&2
 
 # If not running interactively, just exit
 if [ -z "$PS1" ]; then
@@ -19,8 +19,6 @@ fi
 
 # Load the sh scripts in personal bashrc.d directory
 for script in $HOME/.bashrc.d/*.sh; do
-    if [ -r $script ]; then
-       [ $DEBUG ] && echo "Loading $script"
-       . $script
-    fi
+   [ ${DEBUG} ] && echo "Loading ${script}" >&2
+   . ${script}
 done

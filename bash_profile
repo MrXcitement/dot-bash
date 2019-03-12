@@ -19,21 +19,23 @@
 # Source ~/.profile.d/*.sh and *.bash files
 # Source ~/.bashrc file
 
-[ $DEBUG ] && echo "Loading $BASH_SOURCE"
+[ $DEBUG ] && echo "[${BASH_SOURCE}]" >&2
 
 # Load the system /etc/profile
 if [ -r /etc/profile ]; then
+	[ $DEBUG ] && echo "Loading /etc/profile" >&2
     . /etc/profile
 fi
 
 # Load the sh and bash scripts in the personal profile directory
-for script in $HOME/.profile.d/*sh; do
-	[ $DEBUG ] && echo "Loading $script"
-	. $script
+for script in ${HOME}/.profile.d/*sh; do
+	[ $DEBUG ] && echo "Loading ${script}"
+	. ${script}
 done
 
 # load the personal bashrc file
-if [ -r $HOME/.bashrc ]; then
-    . $HOME/.bashrc
+if [ -r ${HOME}/.bashrc ]; then
+    [ $DEBUG ] && echo "Loading ${HOME}/.bashrc" >&2
+    . ${HOME}/.bashrc
 fi
 

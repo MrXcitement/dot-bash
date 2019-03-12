@@ -4,7 +4,7 @@
 # April 13th, 2013
 # Copyright (C) 2013-2014 Mike Barker
 
-[ $DEBUG ] && echo "Loading $BASH_SOURCE"
+[ ${DEBUG} ] && echo "${BASH_SOURCE}" >&2
 
 # Cleanup when logging out
 if [ -n "$GNOME_KEYRING_PID" ]; then
@@ -12,4 +12,4 @@ if [ -n "$GNOME_KEYRING_PID" ]; then
     killall -9 dbus-launch
 fi
 
-echo "Goodbye, from bash..."
+[ ${DEBUG} ] && echo "Goodbye, from bash..." >&2
