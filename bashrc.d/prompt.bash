@@ -237,7 +237,7 @@ git_branch() {
 }
 
 # Run this everytime we show the prompt
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND="history -a;${PROMPT_COMMAND}"
 
 # Now we construct the prompt.
 case ${TERM} in
