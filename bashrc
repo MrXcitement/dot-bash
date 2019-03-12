@@ -6,10 +6,13 @@
 # History
 # 2015-06-11 MRB
 # * Sourced by .bash_profile now.
+# 2019-03-11 MRB
+# * Changed source order to source system bashrc first.
 
 # Sourced by ~/.bash_profile
-# Source ~/.shrc
+#
 # Source /etc/bashrc
+# Source ~/.shrc
 # Source ~/.bashrc.d/*.bash files
 
 [ $DEBUG ] && echo "Loading $BASH_SOURCE"
@@ -19,16 +22,16 @@ if [ -z "$PS1" ]; then
     return
 fi
 
-# load the shrc script
-if [ -f "$HOME/.shrc" ]; then
-	[ $DEBUG ] && echo "Loading $HOME/.shrc"
-	. $HOME/.shrc
-fi
-
 # If the system bashrc file exist, load it.
 if [ -f "/etc/bashrc" ]; then
     [ $DEBUG ] && echo "Loading /etc/bashrc"
     . /etc/bashrc
+fi
+
+# load the shrc script
+if [ -f "$HOME/.shrc" ]; then
+	[ $DEBUG ] && echo "Loading $HOME/.shrc"
+	. $HOME/.shrc
 fi
 
 # Load the bash scripts in the personal .bashrc.d directory

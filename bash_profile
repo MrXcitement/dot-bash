@@ -5,24 +5,25 @@
 
 # History
 # 2015-06-11 MRB
-# * Changed order of sourcing files so that .profile and .profile.d/*.sh get sourced first
-#   This was done in order to make sure that library functions get loaded before everthing else.
+# * Changed order of sourcing files so that .profile and .profile.d/*.sh get
+# sourced first This was done in order to make sure that library functions get
+# loaded before everthing else.
+# 2019-03-11 MRB
+# * I have moved the sourcing of files in .profile.d first, followed by
+# sourcing the .bashrc file.
+# * Source the system profile if it exists.
 
 # Sourced by bash
+# 
+# Source /etc/profile
+# Source ~/.profile.d/*.sh and *.bash files
 # Source ~/.bashrc file
-# Source ~/.profile file
-# Source ~/.profile.d/*.bash files
 
 [ $DEBUG ] && echo "Loading $BASH_SOURCE"
 
-# macOS: add defined paths and manpaths from /etc/paths.d and /etc/manpaths.d
-if [[ -x "/usr/libexec/path_helper" ]]; then
-    eval $(/usr/libexec/path_helper -s)
-fi
-
-# load the personal bashrc file
-if [ -r $HOME/.bashrc ]; then
-    . $HOME/.bashrc
+# Load the system /etc/profile
+if [ -r /etc/profile ]; then
+    . /etc/profile
 fi
 
 # Load the sh and bash scripts in the personal profile directory
@@ -32,3 +33,9 @@ for script in $HOME/.profile.d/*.{sh,bash}; do
 	. $script
     fi
 done
+
+# load the personal bashrc file
+if [ -r $HOME/.bashrc ]; then
+    . $HOME/.bashrc
+fi
+
