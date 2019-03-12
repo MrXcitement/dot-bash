@@ -7,9 +7,9 @@
 # https://pandoc.org/
 
 # Check for required apps
-PANDOC_PATH=$(command -v pandoc)
-LYNX_PATH=$(command -v lynx)
-if [ -z $PANDOC_PATH ] || [ -z $LYNX_PATH ]; then
+PANDOC_APP=$(command -v pandoc)
+LYNX_APP=$(command -v lynx)
+if [ -z $PANDOC_APP ] || [ -z $LYNX_APP ]; then
     return
 fi
 

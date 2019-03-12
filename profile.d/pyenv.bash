@@ -5,7 +5,7 @@
 # Check if pyenv is installed, then initialize it
 if [[ $(type -P "pyenv") ]]; then
     export PYENV_ROOT="${HOME}/.pyenv"
-    export PATH="${PYENV_ROOT}/bin:${PATH}"
+    pathprepend "${PYENV_ROOT}/bin"
     eval "$(pyenv init -)"
 
     # Initialize pyenv's virtualenv plugin, if installed

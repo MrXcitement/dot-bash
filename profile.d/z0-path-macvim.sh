@@ -4,6 +4,6 @@
 # October 1, 2017
 
 MACVIM_PATH="/Applications/MacVim.app/Contents/bin"
-if [ -d $MACVIM_PATH ]; then
-    PATH=$MACVIM_PATH:$PATH
+if [ -d "${MACVIM_PATH}" ]; then
+    pathprepend "${MACVIM_PATH}"
 fi

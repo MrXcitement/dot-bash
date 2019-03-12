@@ -7,4 +7,4 @@
 # Requires: awk
 # See: https://unix.stackexchange.com/questions/14895/duplicate-entries-in-path-a-problem
 
-PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')

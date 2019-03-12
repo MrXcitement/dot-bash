@@ -27,11 +27,9 @@ if [ -r /etc/profile ]; then
 fi
 
 # Load the sh and bash scripts in the personal profile directory
-for script in $HOME/.profile.d/*.{sh,bash}; do
-    if [ -r $script ]; then
+for script in $HOME/.profile.d/*sh; do
 	[ $DEBUG ] && echo "Loading $script"
 	. $script
-    fi
 done
 
 # load the personal bashrc file
