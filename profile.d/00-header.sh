@@ -1,9 +1,11 @@
+#!/bin/sh
 # Display the bash version and DISPLAY setting
 if [ -n "$BASH" ]; then
+    # shellcheck shell=bash disable=SC2154
     # Display the bash version and DISPLAY setting
-    printf "${BBlue}This is BASH ${BRed}${BASH_VERSION%.*}${NC}\n"
+    printf "%sThis is BASH %s\n" "${BBlue}" "${BRed}${BASH_VERSION%.*}${NC}"
     if [ -n "$DISPLAY" ]; then
-        printf "${BBlue}DISPLAY on ${BRed}$DISPLAY${NC}\n"
+        printf "%sDISPLAY on %s\n" "${BBlue}" "${BRed}$DISPLAY${NC}"
     fi
 
 else
@@ -14,4 +16,4 @@ else
 fi
 
 # Display the date
-echo "$(date)"
+date

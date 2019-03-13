@@ -1,4 +1,5 @@
-# Command aliases for emacs
+#!/bin/sh
+# alias-emacs.sh --- Command aliases for emacs
 alias e='emacs'
 alias en='e -nw'
 alias ec='emacsclient -a ""'

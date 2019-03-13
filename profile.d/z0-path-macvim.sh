@@ -1,3 +1,4 @@
+#!/bin/sh
 # path-macvim.sh --- Prepend the macvim bin folder to the path
 #
 # Mike Barker <mike@thebarkers.com>

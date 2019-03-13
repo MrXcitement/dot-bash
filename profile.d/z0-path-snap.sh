@@ -1,3 +1,4 @@
+#!/bin/sh
 # path-snap.sh --- Append the snap bin folder to the path
 #
 # Mike Barker <mike@thebarkers.com>

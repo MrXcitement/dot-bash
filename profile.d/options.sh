@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Manipulate shell options
 set -o notify	   # report status of terminated background jobs immediately
 set -o noclobber   # prevent redirection from overwriting files

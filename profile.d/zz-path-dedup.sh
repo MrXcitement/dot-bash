@@ -1,4 +1,4 @@
-#!bash
+#!/bin/sh
 # zz-path-dedup.bash --- Clean duplicates from the PATH
 
 # Mike Barker <mike@thebarkers.com>

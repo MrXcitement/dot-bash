@@ -1,3 +1,4 @@
+#!/bin/bash
 # cargo.sh --- configure the rust cargo setup
 
 RUST_SRC_PATH="${HOME}/src/rust/src"
