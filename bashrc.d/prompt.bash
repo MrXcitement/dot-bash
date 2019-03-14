@@ -38,12 +38,6 @@
 #    Command is added to the history file each time you hit enter,
 #    so it's available to all shells (using 'history -a').
 
-# Color definitions have moved to ./ansi-colors file.
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
-# shellcheck source=/dev/null
-source "${DIR}/ansi-colors"
-
 ALERT=${CLR_BOLD_WHITE}${CLR_BACK_RED} # Bold White on red background
 
 # Get the system name
