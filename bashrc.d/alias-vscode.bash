@@ -1,3 +1,4 @@
+#!/bin/bash
 # function to start vscode.app from the command line
 # https://code.visualstudio.com/Docs/setup
 
@@ -9,7 +10,6 @@
 
 # On Darwin/macOS systems that have Visual Studio Code installed
 # Set an alias to the binary.
-if [[ "${SYSTEM}" == "Darwin" ]]; then 
-    VSCODE="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-    alias code="${VSCODE}"
+if [[ -d "/Applications/Visual\ Studio\ Code.app" ]]; then 
+    alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 fi

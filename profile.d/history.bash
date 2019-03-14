@@ -1,3 +1,4 @@
+#!/bin/bash
 # History configuration
 export HISTSIZE=1000
 export HISTIGNORE="&:?:??:exit:pwd:clear"

@@ -1,3 +1,4 @@
+#!/bin/bash
 # Get the system name
 SYSTEM=$(uname -s)
 BASH_COMPLETION_FILE=""
@@ -10,6 +11,5 @@ elif [[ "${SYSTEM}" == "Linux" ]]; then
 fi
 
 # If the bash completion file is available, initialize it.
-if [[ -f ${BASH_COMPLETION_FILE} ]]; then
-    . ${BASH_COMPLETION_FILE}
-fi
+# shellcheck source=/dev/null
+[[ -f ${BASH_COMPLETION_FILE} ]] && . ${BASH_COMPLETION_FILE}

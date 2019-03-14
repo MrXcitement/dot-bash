@@ -1,3 +1,4 @@
+#!/bin/bash
 # fasd.bash --- Initialize the fasd command line navigator
 # https://github.com/clvv/fasd
 

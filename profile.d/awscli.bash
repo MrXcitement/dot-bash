@@ -17,6 +17,6 @@ if [[ $(type -P aws) ]]; then
     credentials="/Users/mike/.aws/credentials"
     if [ -f $credentials ]; then
         export AWS_CREDENTIAL_FILE=$credentials
-        complete -C `which aws_completer` aws
+        complete -C "$(command -v aws_completer)" aws
     fi
 fi

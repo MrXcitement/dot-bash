@@ -1,3 +1,4 @@
+#!/bin/bash
 # sshagent.ssh --- initialize the ssh-agent process to store private keys
 
 # Copyright (C) 2014 Mike Barker
@@ -29,6 +30,7 @@ function agent_is_running() {
 
 function agent_load_env() {
 	if [ -f "$SSH_ENV" ]; then
+        # shellcheck source=/dev/null
 		source "$SSH_ENV" > /dev/null
 	fi
 }
@@ -54,8 +56,9 @@ function sshagent_main() {
 
 function keychain_main() {
 	echo 'Loading keychain...'
-	keychain $HOME/.ssh/id_rsa
-	source $HOME/.keychain/$HOSTNAME-sh
+	keychain "$HOME/.ssh/id_rsa"
+    # shellcheck source=/dev/null
+	source "$HOME/.keychain/$HOSTNAME-sh"
 }
 
 if [ -x "$(command -v keychain)" ]; then

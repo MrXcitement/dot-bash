@@ -1,3 +1,4 @@
+#!/bin/bash
 # 10-header-fortune.bash --- print out a random fortune, use cowsay if installed
 
 # This script will check for the fortune program and use it to
@@ -82,17 +83,17 @@ while getopts ":c:" opt; do
 done
 shift $((OPTIND-1))
 [ "$1" = "--" ] && shift
-[ ${DEBUG} ] && echo "Cowfile: ${_COWFILE}" >&2
+[ "${DEBUG}" ] && echo "Cowfile: ${_COWFILE}" >&2
 
 # if fortune is installed
 if type fortune >/dev/null 2>&1; then
     echo
     # if cowsay is installed
     if type cowsay >/dev/null 2>&1; then
-        [ ${DEBUG} ] && echo "fortune -s | cowsay -f $(get_cowpath)/$(replace_bad_cowfile $(get_cowfile))" >&2
+        [ "${DEBUG}" ] && echo "fortune -s | cowsay -f $(get_cowpath)/$(replace_bad_cowfile $(get_cowfile))" >&2
         fortune -s | cowsay -f $(get_cowpath)/$(replace_bad_cowfile $(get_cowfile))
     else
-        [ ${DEBUG} ] && echo "fortune -s" >&2
+        [ "${DEBUG}" ] && echo "fortune -s" >&2
         fortune -s
     fi
     echo

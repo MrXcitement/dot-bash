@@ -1,3 +1,4 @@
+#!/bin/bash
 # vmware.bash --- Aliases and settings for a system with vmware fusion or workstation installed
 # Create alias to vmware command line tools
 

@@ -1,3 +1,4 @@
+#!/bin/bash
 # pyenv.bash --- initalize the pyenv python management system
 # Mike Barker <mike@thebarkers.com>
 # September 29th 2016

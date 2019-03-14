@@ -1,7 +1,9 @@
+#!/bin/bash
 # cheat-sh-completion --- cheat.sh/cht.sh bash completion
 # see: https://github.com/chubin/cheat.sh#tab-completion
 # August 20th 2018
 
+# shellcheck disable=SC2034,SC2086,SC2207
 _cht_complete()
 {
     local cur prev opts

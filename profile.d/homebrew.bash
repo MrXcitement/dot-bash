@@ -1,3 +1,4 @@
+#!/bin/bash
 # homebrew.bash --- Configure the homebrew package system
 
 # Author: Mike Barker <mike@thebarkers.com>
@@ -10,6 +11,6 @@
 # Only if on an OSX system and homebrew installed
 SYSTEM=$(uname -s)
 if [[ "$SYSTEM" == "Darwin" && $(command -v brew) ]]; then
-    [ ${DEBUG} ] && echo "...Configuring homebrew cask options" >&2
+    [ "${DEBUG}" ] && echo "...Configuring homebrew cask options" >&2
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
