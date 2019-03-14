@@ -7,8 +7,6 @@
 # If the cowsay program is installed, cowsay will be used to print
 # the fortune.
 
-# If the shufl or gshufl program is installed a random cow will be used.
-
 # If a cow file is provided, then it will be used instead.
 
 # If the cow file selected or requested is in the _BAD_COWS
@@ -24,31 +22,22 @@
 # Fix bug when no shuffle program instaled.
 # if no shuffle program always use the default cow.
 
-_COWFILE=""
-_BAD_COWS=("sodomized.cow telebears.cow head-in.cow")
+# 2019-03-14 MRB
+# Remove the dependance on gshuf/shuf program to select a random cow.
+# Cleanup syntax warnings/errors using shellcheck linter.
 
-replace_bad_cowfile() {
+_COWFILE=""
+_BAD_COWS=("bong.cow sodomized.cow telebears.cow head-in.cow")
+
+__cows_replace_bad_cowfile() {
     local cowfile=$1
-    if [[ " ${_BAD_COWS[@]} " =~ " $1 " ]]; then
+    if [[ "${_BAD_COWS[*]}" =~ $1 ]]; then
         cowfile="default.cow"
     fi
     echo ${cowfile}
 }
 
-get_shuffle() {
-    local shuffle=""
-    if [[ "$(uname)" = "Darwin" ]]; then
-        shuffle=gshuf
-    else
-        shuffle=shuf
-    fi
-    if ! type ${shuffle} >/dev/null 2>&1; then
-        shuffle=""
-    fi
-    echo ${shuffle}
-}
-
-get_cowpath() {
+__cows_get_cowpath() {
     local cowpath=""
     if [[ "$(uname)" = "Darwin" ]]; then
         cowpath=/usr/local/share/cows
@@ -58,18 +47,19 @@ get_cowpath() {
     echo ${cowpath}
 }
 
-get_cowfile() {
-    local cowfile="default.cow"
-    if [[ "$_COWFILE" = "" ]]; then
-        if [[ -n $(get_shuffle) ]]; then
-            cowfile=$(ls $(get_cowpath)/*.cow | \
-                      xargs -n1 basename | \
-                      $(get_shuffle) -n1)
-        fi
+__cows_get_cowfile() {
+    local cows cowpath cowfile
+    cowfile="default.cow"
+    if [[ "$_COWFILE" ]]; then
+        cowfile=$_COWFILE   
     else
-        cowfile=$_COWFILE
+        cowpath=$(__cows_get_cowpath)
+        cows=("${cowpath}"/*.cow)
+        num_cows=${#cows[@]}
+        rnd_cow_id=$((RANDOM % num_cows))
+        cowfile=$(basename "${cows[$rnd_cow_id]}")
     fi
-    echo ${cowfile}
+    printf "%s" "$(__cows_replace_bad_cowfile "${cowfile}")"
 }
 
 # parse commandline
@@ -79,19 +69,20 @@ while getopts ":c:" opt; do
         c)
             _COWFILE=$OPTARG
             ;;
+        *)
+            ;;
     esac
 done
 shift $((OPTIND-1))
 [ "$1" = "--" ] && shift
-[ "${DEBUG}" ] && echo "Cowfile: ${_COWFILE}" >&2
 
 # if fortune is installed
 if type fortune >/dev/null 2>&1; then
     echo
     # if cowsay is installed
-    if type cowsay >/dev/null 2>&1; then
-        [ "${DEBUG}" ] && echo "fortune -s | cowsay -f $(get_cowpath)/$(replace_bad_cowfile $(get_cowfile))" >&2
-        fortune -s | cowsay -f $(get_cowpath)/$(replace_bad_cowfile $(get_cowfile))
+    if [[ $(command -v cowsay) ]]; then
+        [ "${DEBUG}" ] && echo "fortune -s | cowsay -f $(__cows_get_cowpath)/$(__cows_get_cowfile)" >&2
+        fortune -s | cowsay -f "$(__cows_get_cowpath)"/"$(__cows_get_cowfile)"
     else
         [ "${DEBUG}" ] && echo "fortune -s" >&2
         fortune -s
