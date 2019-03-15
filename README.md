@@ -1,4 +1,5 @@
 # dot-bash
+[![Build Status](https://travis-ci.org/MrXcitement/dot-bash.svg?branch=master)](https://travis-ci.org/MrXcitement/dot-bash)
 My personal 'sh' and 'bash' shell configuration files.
 
 ## System
