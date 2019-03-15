@@ -1,0 +1,8 @@
+#!/bin/bash
+
+shellcheck ./home/.bash_*
+shellcheck ./home/.bashrc
+shellcheck ./home/.profile
+shellcheck ./home/.shrc
+shellcheck ./home/.profile.d/*sh
+shellcheck ./home/.bashrc.d/*sh

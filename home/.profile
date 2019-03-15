@@ -1,3 +1,4 @@
+#!/bin/sh
 # profile -- Personal environment variables and startup programs.
 
 # Author: Mike Barker <mike@thebarkers.com>
@@ -15,23 +16,26 @@
 # Source ~/.profile.d/*.sh files
 # Source ~/.shrc file
 
-[ ${DEBUG} ] && echo "[${HOME}/.profile]" >&2
+[ "${DEBUG}" ] && echo "[${HOME}/.profile]" >&2
 
 # Load the system /etc/profile
 if [ -r /etc/profile ]; then
-    [ ${DEBUG} ] && echo "Loading /etc/profile" >&2
+    [ "${DEBUG}" ] && echo "Loading /etc/profile" >&2
+    # shellcheck source=/dev/null
     . /etc/profile
 fi
 
 # Load the bash scripts in personal profile directory
-for script in $HOME/.profile.d/*.sh; do
-    [ ${DEBUG} ] && echo "Loading ${script}" >&2
-    . ${script}
+for script in "$HOME"/.profile.d/*.sh; do
+    [ "${DEBUG}" ] && echo "Loading ${script}" >&2
+    # shellcheck source=/dev/null
+    . "${script}"
 done
 
 # If the personal .shrc file exist, source it
-if [ -f $HOME/.shrc ]; then
-    [ ${DEBUG} ] && echo "Loading ${HOME}/.shrc" >&2
-   . ${HOME}/.shrc
+if [ -f "$HOME/.shrc" ]; then
+    [ "${DEBUG}" ] && echo "Loading ${HOME}/.shrc" >&2
+    # shellcheck source=/dev/null
+   . "${HOME}/.shrc"
 fi
 

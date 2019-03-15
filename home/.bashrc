@@ -1,3 +1,4 @@
+#!/bin/bash
 # bashrc -- Personal aliases and functions used by bash
 
 # Mike Mike <mike@thebarkers.com>
@@ -15,7 +16,8 @@
 # Source ~/.shrc
 # Source ~/.bashrc.d/*.bash files
 
-[ ${DEBUG} ] && echo "[${BASH_SOURCE}]" >&2
+# shellcheck disable=SC2128
+[ "${DEBUG}" ] && echo "[${BASH_SOURCE}]" >&2
 
 # If not running interactively, just exit
 if [ -z "$PS1" ]; then
@@ -24,18 +26,21 @@ fi
 
 # If the system bashrc file exist, load it.
 if [ -f "/etc/bashrc" ]; then
-    [ ${DEBUG} ] && echo "Loading /etc/bashrc" >&2
-    . /etc/bashrc
+    [ "${DEBUG}" ] && echo "Loading /etc/bashrc" >&2
+    # shellcheck source=/dev/null
+    . "/etc/bashrc"
 fi
 
 # load the shrc script
 if [ -f "$HOME/.shrc" ]; then
-	[ ${DEBUG} ] && echo "Loading ${HOME}/.shrc" >&2
-	. ${HOME}/.shrc
+	[ "${DEBUG}" ] && echo "Loading ${HOME}/.shrc" >&2
+    # shellcheck source=/dev/null
+	. "${HOME}/.shrc"
 fi
 
 # Load the bash scripts in the personal .bashrc.d directory
-for script in $HOME/.bashrc.d/*.bash; do
-    [ ${DEBUG} ] && echo "Loading ${script}" >&2
-    . ${script}
+for script in "$HOME"/.bashrc.d/*.bash; do
+    [ "${DEBUG}" ] && echo "Loading ${script}" >&2
+    # shellcheck source=/dev/null
+    . "${script}"
 done
