@@ -10,6 +10,6 @@
 
 # On Darwin/macOS systems that have Visual Studio Code installed
 # Set an alias to the binary.
-if [[ -d "/Applications/Visual\ Studio\ Code.app" ]]; then 
+if [[ -d "/Applications/Visual Studio Code.app" ]]; then 
     alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 fi
