@@ -46,7 +46,7 @@ SYSTEM=$(uname -s)
 # User color based on user type
 __prompt_user_color() {
     local user_name color
-    user_name=$(logname)
+    user_name=$(logname > /dev/null 2>&1)
     # shellcheck disable=SC2181
     if [[ $? -ne 0 ]]; then
        user_name=$USER
