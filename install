@@ -8,10 +8,5 @@
 # * renamed from makelinks.sh to install.sh
 # * force create the sympolic links
 
-#echo "$(basename $0)"
-#echo "Make sympolic links in the users home directory to the bash config files and directories"
-
 DIR="$(cd "$(dirname "$0")" && pwd)"
-pushd ${DIR} > /dev/null
-stow -t $HOME home
-popd > /dev/null
+stow -d "${DIR}" -t "$HOME" -R home
