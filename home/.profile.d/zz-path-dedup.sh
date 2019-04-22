@@ -5,6 +5,6 @@
 # March 12th 2019
 
 # Requires: awk
-# See: https://unix.stackexchange.com/questions/14895/duplicate-entries-in-path-a-problem
+# See: https://unix.stackexchange.com/questions/40749/remove-duplicate-path-entries-with-awk-command
 
-PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
+PATH=$(printf %s "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++')
