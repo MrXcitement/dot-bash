@@ -12,20 +12,6 @@
 #echo "Make sympolic links in the users home directory to the bash config files and directories"
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
-# pushd ${DIR} > /dev/null
-shopt -s dotglob
-for f in home/*; do
-    FILE=$(basename "$f")
-    if [ -a "${HOME}/${FILE}" ]; then
-        if ! [ -h "${HOME}/${FILE}" ]; then
-            echo "Backing up ${HOME}/${FILE}"
-            mv -v "${HOME}/${FILE}" "${HOME}/${FILE}.backup"
-        fi
-    fi
-    if [ ! -a "${HOME}/${FILE}" ]; then
-        echo "Linking file ${FILE}"
-        ln -sfnv "${DIR}/home/${FILE}" "${HOME}/${FILE}"
-    fi
-done
-shopt -u dotglob
-# popd > /dev/null
+pushd ${DIR} > /dev/null
+stow -t $HOME home
+popd > /dev/null
