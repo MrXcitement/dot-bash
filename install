@@ -8,5 +8,41 @@
 # * renamed from makelinks.sh to install.sh
 # * force create the sympolic links
 
+# 2019.04.22 MRB
+# - Backup existing bash files and link files/dirs in the home dir
+#   to the users $HOME dir.
+
+# Backup a file/directory by renaming it with the current date and time
+backup_file() {
+	file=$1
+	file_ext=$(date +%Y%m%d%H%M)
+
+	if [ -e "${file}" ]; then
+		if ! [ -h "${file}" ]; then
+			echo "Backing up ${file} to: ${file}.${file_ext}"
+			mv "${file}" "${file}.${file_ext}"
+		fi
+	fi
+}
+
+# create a symbolic link if one does not allready exist
+link_file() {
+    local src=$1
+    local dst=$2
+
+    if ! [ -e "${dst}" ]; then
+        echo "Linking file ${dst}"
+        ln -sfnv "${src}" "${dst}"
+    fi
+}
+
+# Backup existing files and link files/dirs in the home folder into
+# the users home directory.
 DIR="$(cd "$(dirname "$0")" && pwd)"
-stow -d "${DIR}" -t "$HOME" -R home
+shopt -s dotglob
+for src in "${DIR}"/home/*; do
+    dst="${HOME}"/$(basename "$src")
+    backup_file "$dst"
+    link_file "$src" "$dst"
+done
+shopt -u dotglob
