@@ -7,9 +7,16 @@
 # 2019.03.11 MRB
 # Recommended launch strategy is to add the binary to the path...
 # I am just aliasing the binary instead.
+# 2019.05.03 MRB
+# - Changed alias for vscode from code to vsc
+# - Added vscode insiders as vsci
 
 # On Darwin/macOS systems that have Visual Studio Code installed
 # Set an alias to the binary.
 if [[ -d "/Applications/Visual Studio Code.app" ]]; then 
-    alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+    alias vsc="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+fi
+
+if [[ -d "/Applications/Visual Studio Code - Insiders.app" ]]; then
+    alias vsci="/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code"
 fi
